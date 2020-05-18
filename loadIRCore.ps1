@@ -21,3 +21,9 @@ if((Get-Variable -Name GlobalTargetList -ErrorAction SilentlyContinue) -eq $null
 } 
 
 Write-ColoredInformation -MessageData "GlobalTargetList variable set" -ForegroundColor "Blue"
+
+# Set up the global credential variable
+if ($cred -eq $null){
+    $cred = Get-Credential
+    New-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
+}
