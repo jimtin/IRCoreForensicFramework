@@ -1,0 +1,7 @@
+.\SetupModules\Get-Executeable.psm1
+.\SetupModules\Get-SetupExecuteables.psm1
+.\CoreEndpointInteraction\New-EndpointSession.psm1
+.\CoreEndpointInteraction\Remove-EndpointSession.psm1
+.\FunStuff\Write-ColoredInformation.psm1
+.\CoreEndpointInteraction\Get-TargetList.psm1
+.\CoreEndpointInteraction\New-Target.psm1

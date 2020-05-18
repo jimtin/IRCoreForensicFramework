@@ -1,0 +1,7 @@
+[
+    {
+        "ExecutableName": "WinPmem.exe",
+        "DownloadURL": "https://github.com/google/rekall/releases/download/v1.3.1/winpmem_1.6.2.exe",
+        "OutputPath": "Executeables"
+    }
+]
