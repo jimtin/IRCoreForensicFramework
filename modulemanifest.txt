@@ -7,3 +7,4 @@
 .\CoreEndpointInteraction\New-Target.psm1
 .\CoreEndpointInteraction\Get-TargetSessions.psm1
 .\CoreEndpointInteraction\Invoke-HostCommand.psm1
+.\CoreEndpointInteraction\New-TooltipNotification.psm1

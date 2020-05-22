@@ -17,6 +17,7 @@ function Invoke-HostCommand{
 
     # Take command and run as a job
     $CommandJob = Invoke-Command -Session $targets -ScriptBlock $Scriptblock -AsJob 
+    Write-Host $CommandJob.id
 
     # Set up the wait variable
     $wait = 0
@@ -37,8 +38,18 @@ function Invoke-HostCommand{
         }
         $wait += 1
         Start-Sleep -Seconds 1
-    }while ($wait -lt 10)
+    }while ($wait -lt 5)
 
-    # If not completed, will need to background and add to a global variable
+    # If not completed, register the event and return prompt to user. This allows actions to continue.
+    # The input object for the event is the $CommandJob
+    # Register the event job
+    Register-ObjectEvent -InputObject $CommandJob -EventName StateChanged -Action {
+        if($sender.State -eq "Completed"){
+            $global:testoutput = Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
+            New-TooltipNotification
+            $message = "Job ID " + $sender.Id + " using command " + $sender.Command + " is completed"
+            Write-Host $message  
+        }
+    }
 
 }
