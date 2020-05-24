@@ -5,11 +5,15 @@ function Invoke-HostCommand{
 
     .DESCRIPTION
         Complete alias for Invoke-Command using sessions
+
+    
     #>
 
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]$Scriptblock
+        [Parameter(Mandatory=$true)]$Scriptblock,
+        [Parameter()][switch]$RegisterCommand, 
+        [Parameter()]$SimpleCommand
     )
 
     # Get the current list of target powershell sessions
@@ -17,39 +21,43 @@ function Invoke-HostCommand{
 
     # Take command and run as a job
     $CommandJob = Invoke-Command -Session $targets -ScriptBlock $Scriptblock -AsJob 
-    Write-Host $CommandJob.id
 
-    # Set up the wait variable
-    $wait = 0
-
-    # Get status. If not equal to completed, check if completed 5 times (5 more seconds)
-    Do{
-        $status = Get-Job -Id $CommandJob.Id
-        if($status.State -eq "Completed"){
-            Write-Host "Job completed"
-            # If completed, get the results
-            $output = Receive-Job -id $CommandJob.Id
-            # Now delete the job as it is completed
-            Receive-Job -Job $CommandJob -AutoRemoveJob -Wait
-            Write-Output $output
-            break
-        }else{
-            Write-ColoredInformation -Message "Powershell job still running"
-        }
-        $wait += 1
-        Start-Sleep -Seconds 1
-    }while ($wait -lt 5)
-
-    # If not completed, register the event and return prompt to user. This allows actions to continue.
-    # The input object for the event is the $CommandJob
-    # Register the event job
-    Register-ObjectEvent -InputObject $CommandJob -EventName StateChanged -Action {
-        if($sender.State -eq "Completed"){
-            $global:testoutput = Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
-            New-TooltipNotification
-            $message = "Job ID " + $sender.Id + " using command " + $sender.Command + " is completed"
-            Write-Host $message  
-        }
+    # Set up the SimpleCommand text for tooltip notification
+    if($SimpleCommand -eq $null){
+        $SimpleCommand = $Scriptblock.toString()
     }
 
+    # If RegisterCommand switch selected, register the job
+    if ($RegisterCommand){
+        # Set up Message title
+        $MessageTitle = $SimpleCommand + " Remote Job"
+        # Update the message
+        $Message = "Powershell job " + $SimpleCommand + " started"
+        New-ToolTipNotification -MessageTitle $MessageTitle -Message $Message
+        Register-ObjectEvent -InputObject $CommandJob -EventName StateChanged -Action {
+            if($sender.State -eq "Completed"){
+                $MessageTitle = $SimpleCommand + " Remote Job"
+                $global:testoutput = Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
+                $Message = "Powershell job " + $SimpleCommand + " completed"
+                New-TooltipNotification -MessageTitle $MessageTitle -Message $Message
+                $eventSubscriber | Unregister-Event
+                $eventSubscriber.Action | Remove-Job -Force
+            }
+        } | Out-Null
+    }else{
+        Do{
+            $status = Get-Job -Id $CommandJob.Id
+            if($status.State -eq "Completed"){
+                # If completed, get the results
+                $output = Receive-Job -id $CommandJob.Id
+                # Now delete the job as it is completed
+                Receive-Job -Job $CommandJob -AutoRemoveJob -Wait
+                Write-Output $output
+                break
+            }else{
+                Write-ColoredInformation -Message "Powershell job still running"
+            }
+            Start-Sleep -Seconds 1
+        }while ($true)
+    }
 }

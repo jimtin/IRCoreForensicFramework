@@ -10,7 +10,8 @@ function New-TooltipNotification{
 
     [CmdletBinding()]
     param (
-        #[Parameter(Mandatory=$true)]$Job
+        [Parameter(HelpMessage="The message title")]$MessageTitle="Powershell Job Update",
+        [Parameter(HelpMessage="The body of text to be displayed in message")]$Message="Powershell job completed"
     )
 
     # Add the assembly name required for use
@@ -40,8 +41,8 @@ function New-TooltipNotification{
     $MessageType = "Info"
     # Set up tip text and icons
     $balloon.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]$MessageType
-    $balloon.BalloonTipText  = "Powershell Job completed"
-    $balloon.BalloonTipTitle = "Powershell Job completed"
+    $balloon.BalloonTipText  = $Message
+    $balloon.BalloonTipTitle = $MessageTitle
     $balloon.Visible = $true
 
     # Display the tool tip and specify how many milliseconds it will stay visible for
