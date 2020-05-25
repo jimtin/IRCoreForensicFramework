@@ -1,9 +1,9 @@
-function New-Target{
+function Remove-Target{
     <#
     .SYNOPSIS
-        Creates a new target to be targeted 
+        Removes a target from target list 
     .DESCRIPTION
-        Creates a new target to be targeted
+        Removes a target from the target list
     #>
 
     [CmdletBinding()]
@@ -11,20 +11,19 @@ function New-Target{
         [Parameter(Mandatory=$true)][string[]]$Target
     )
 
-    # Confirm if creds variable is set
-    if ($cred -eq $null){
-        $cred = Get-Credential
-    }
-
     # Iterate through the input target and setup sessions
     foreach ($endpoint in $Target){
         # Check if already in list
         if($GlobalTargetList.ContainsKey($endpoint)){
-            $message = "Target " + $endpoint + " already exists"
-            Write-ColoredInformation -MessageData $message
+            # If yes, remove
+            Remove-EndpointSession -Target $endpoint | Out-Null
+            $message = "Target " + $endpoint + " removed"
         }else{
-            New-EndpointSession -Target $endpoint -Credential $cred
+            $message = "Target " + $endpoint + " is not currently targeted"
         }
+
+        # Inform user
+        Write-ColoredInformation -MessageData $message
     }
 
     # At the end of adding them all all, give the user a list of targets

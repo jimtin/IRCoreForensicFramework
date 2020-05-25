@@ -8,3 +8,7 @@
 .\CoreEndpointInteraction\Get-TargetSessions.psm1
 .\CoreEndpointInteraction\Invoke-HostCommand.psm1
 .\CoreEndpointInteraction\New-TooltipNotification.psm1
+.\CoreEndpointInteraction\Remove-Target.psm1
+.\Actions\CreateStagingLocation\New-RemoteStagingLocation.psm1
+.\Actions\TransferExecutables\Move-WinPMEM.psm1
+.\Actions\DumpandRetrieveMemory\Invoke-MemoryDump.psm1

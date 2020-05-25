@@ -1,9 +1,9 @@
 function Remove-EndpointSession{
     <#
     .SYNOPSIS
-        Creates a new endpoint session
+        Removes an endpoint session
     .DESCRIPTION
-        Creates a session on specified endpoint, updates the GlobalTargetList
+        Removes an endpoint session
     #>
 
     [CmdletBinding()]
@@ -20,9 +20,10 @@ function Remove-EndpointSession{
 
     # Find the session in the GlobalTargetList
     $contains = $GlobalTargetList.Contains($Target)
+
     # If the session exists, be awesome, close the session down then remove from the GlobalTargetList
     if($contains -eq $true){
-        Remove-PSSession -Name $Target 
+        Remove-PSSession -ComputerName $Target 
         $output.Add("Endpoint", $Target)
         $GlobalTargetList.Remove($Target)
         $output.Outcome = "Success"
