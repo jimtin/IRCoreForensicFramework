@@ -23,7 +23,7 @@ function Remove-EndpointSession{
 
     # If the session exists, be awesome, close the session down then remove from the GlobalTargetList
     if($contains -eq $true){
-        Remove-PSSession -ComputerName $Target 
+        Get-PSSession | Where-Object {$_.ComputerName -eq $endpoint} | Remove-PSSession
         $output.Add("Endpoint", $Target)
         $GlobalTargetList.Remove($Target)
         $output.Outcome = "Success"

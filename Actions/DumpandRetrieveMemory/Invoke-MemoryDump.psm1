@@ -11,7 +11,10 @@ function Invoke-MemoryDump{
         
     )
 
-    $outcome = @{}
+    # Set up outcome variable
+    $outcome = @{
+        "HostHunterObject" = "Invoke-MemoryDump"
+    }
     # Run command
     Invoke-HostCommand -RegisterCommand -ScriptBlock{
         # Create outcome dictionary
@@ -36,13 +39,21 @@ function Invoke-MemoryDump{
         if($disk -gt $ramsize){
             $outcome.Add("EnoughSpace", $true)
             if($path -eq $true){
-                C:\PerformanceInformation\mem_info.exe "C:\PerformanceInformation\memory.raw"
+                $memdump = C:\PerformanceInformation\mem_info.exe "C:\PerformanceInformation\memory.raw"
+                $outcome.Add("MemdumpInfo", $memdump)
             }
         }else{
             $outcome.Add("EnoughSpace", $false)
         }
         Write-Output $outcome
-    }
+    } -SimpleCommand "Invoke-MemoryDump"
+
+    # Get the output of the command from the global RegisteredCommand variable
+    $memdump = Get-Variable -Name RegisteredCommand -Scope global
+
+    # Add the outcome from the command to the outcome variable
+    $outcome.Add("Outcome", $memdump)
         
+    # Return the results to the user
     Write-Output $outcome
 }

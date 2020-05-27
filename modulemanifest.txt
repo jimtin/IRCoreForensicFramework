@@ -12,3 +12,6 @@
 .\Actions\CreateStagingLocation\New-RemoteStagingLocation.psm1
 .\Actions\TransferExecutables\Move-WinPMEM.psm1
 .\Actions\DumpandRetrieveMemory\Invoke-MemoryDump.psm1
+.\Actions\DumpandRetrieveMemory\Get-MemoryDump.psm1
+.\Actions\RetrieveLogsandSRUDB\Copy-RemoteEventLogging.psm1
+.\Actions\RetrieveLogsandSRUDB\Get-RemoteEventLogging.psm1

@@ -17,9 +17,6 @@ function New-RemoteStagingLocation{
         "StagingLocation" = "C:\PerformanceInformation"
     }
 
-    # Get the current sessions currently stored in target
-    $Session = Get-TargetSessions
-
     # Test the endpoint to see if the Performance Information folder exists
     $pathexists = Invoke-HostCommand -ScriptBlock{
         # Set up output dictionary

@@ -37,7 +37,7 @@ function Invoke-HostCommand{
         Register-ObjectEvent -InputObject $CommandJob -EventName StateChanged -Action {
             if($sender.State -eq "Completed"){
                 $MessageTitle = $SimpleCommand + " Remote Job"
-                $global:testoutput = Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
+                $global:RegisteredCommandOutput = Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
                 $Message = "Powershell job " + $SimpleCommand + " completed"
                 New-TooltipNotification -MessageTitle $MessageTitle -Message $Message
                 $eventSubscriber | Unregister-Event
