@@ -27,3 +27,12 @@ if ($cred -eq $null){
     $cred = Get-Credential
     New-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
 }
+
+# Check if snek is installed
+$snek = Get-InstalledModule -Name snek -ErrorAction SilentlyContinue
+if(-not $snek){
+    Write-ColoredInformation -MessageData "Snek not installed, prompting for install now" -ForegroundColor "Red"
+    Install-Module -Name snek
+}else{
+    Write-ColoredInformation -MessageData "Snek installed" -ForegroundColor "Blue"
+}

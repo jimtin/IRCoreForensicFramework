@@ -21,6 +21,10 @@ function Get-SetupExecuteables{
         $exists = Test-Path -Path $fullpath
         if($exists -ne $true){
             Get-Executeable -DownloadURL $exe.DownloadURL -OutputLocation $exe.OutputPath -ExeName $exe.ExecutableName
+        }else{
+            $exe = ($exe.ExecutableName).ToString()
+            $message = $exe + " is available for HostHunter"
+            Write-ColoredInformation -MessageData $message -ForegroundColor "Blue"
         }
     }
     
