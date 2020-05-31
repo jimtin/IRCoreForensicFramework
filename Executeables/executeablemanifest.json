@@ -3,5 +3,15 @@
         "ExecutableName": "WinPmem.exe",
         "DownloadURL": "https://github.com/google/rekall/releases/download/v1.3.1/winpmem_1.6.2.exe",
         "OutputPath": "Executeables"
+    },
+    {
+        "ExecutableName": "srum_dump2.exe",
+        "DownloadURL": "https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx",
+        "OutputPath": "Executeables"
+    },
+    {
+        "ExecutableName": "SRUM_TEMPLATE2.xlsx",
+        "DownloadURL": "https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx",
+        "OutputPath: Executeables"
     }
 ]

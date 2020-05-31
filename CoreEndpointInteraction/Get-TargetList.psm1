@@ -18,5 +18,7 @@ function Get-TargetList{
     
     Write-ColoredInformation -MessageData "Targets:" -ForegroundColor "Blue"
     Write-ColoredInformation -MessageData $message -ForegroundColor "Red"
+
+    Write-Output $message
     
 }

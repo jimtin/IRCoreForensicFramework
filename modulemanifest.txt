@@ -15,3 +15,4 @@
 .\Actions\DumpandRetrieveMemory\Get-MemoryDump.psm1
 .\Actions\RetrieveLogsandSRUDB\Copy-RemoteEventLogging.psm1
 .\Actions\RetrieveLogsandSRUDB\Get-RemoteEventLogging.psm1
+.\Actions\SRUProcessing\Format-SRUDB.psm1
