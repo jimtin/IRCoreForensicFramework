@@ -12,6 +12,11 @@
     {
         "ExecutableName": "SRUM_TEMPLATE2.xlsx",
         "DownloadURL": "https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx",
-        "OutputPath: Executeables"
+        "OutputPath": "Executeables"
+    }, 
+    {
+        "ExecutableName": "volatility3",
+        "DownloadURL": "https://github.com/volatilityfoundation/volatility3.git",
+        "OutputPath": "Executeables"
     }
 ]

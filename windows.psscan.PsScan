@@ -1,0 +1,288 @@
+20-06-03 05:02:42 root         INFO     Logging started
+20-06-03 05:02:42 root         INFO     Volatility plugins path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\plugins', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\plugins']
+20-06-03 05:02:42 root         INFO     Volatility symbols path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\symbols', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\symbols']
+20-06-03 05:02:42 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\plugins, C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\plugins
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.statistics
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.certificates
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.configwriter
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.frameworkinfo
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.layerwriter
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.timeliner
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.yarascan
+20-06-03 05:02:42 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:02:42 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:02:42 volatility.framework DEBUG    Failed to import module yarascan based on file: yarascan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.bash
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_afinfo
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_syscall
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.elfs
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsmod
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsof
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.malfind
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.proc
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pslist
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pstree
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.bash
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_syscall
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_sysctl
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_trap_table
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.ifconfig
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsmod
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsof
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.malfind
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.netstat
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.proc_maps
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.psaux
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pslist
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pstree
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.tasks
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.timers
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.mac.trustedbsd
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.bigpools
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.callbacks
+20-06-03 05:02:42 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:02:42 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:02:42 volatility.framework DEBUG    Failed to import module windows.callbacks based on file: windows\callbacks
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.cmdline
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlldump
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlllist
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverirp
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.filescan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.handles
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.info
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.malfind
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.moddump
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modules
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.mutantscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.poolscanner
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.procdump
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pslist
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.psscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pstree
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.ssdt
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.strings
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.svcscan
+20-06-03 05:02:42 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:02:42 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:02:42 volatility.framework DEBUG    Failed to import module windows.svcscan based on file: windows\svcscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.symlinkscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vaddump
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadinfo
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadyarascan
+20-06-03 05:02:42 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:02:42 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:02:42 volatility.framework DEBUG    Failed to import module windows.vadyarascan based on file: windows\vadyarascan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.verinfo
+20-06-03 05:02:42 volatility.plugins.windows.verinfo INFO     Python pefile module not found, plugin (and dependent plugins) not available
+20-06-03 05:02:42 volatility.framework DEBUG    No module named 'pefile'
+20-06-03 05:02:42 volatility.framework DEBUG    Failed to import module windows.verinfo based on file: windows\verinfo
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.virtmap
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivedump
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivelist
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivescan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.printkey
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.userassist
+20-06-03 05:02:42 root         INFO     The following plugins could not be loaded (use -vv to see why): volatility.plugins.windows.callbacks, volatility.plugins.windows.svcscan, volatility.plugins.windows.vadyarascan, volatility.plugins.windows.verinfo, volatility.plugins.yarascan
+20-06-03 05:02:42 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\automagic
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.construct_layers
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.linux
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.mac
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.pdbscan
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.stacker
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_cache
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_finder
+20-06-03 05:02:42 volatility.framework DEBUG    Importing module: volatility.framework.automagic.windows
+20-06-03 05:04:14 root         INFO     Logging started
+20-06-03 05:04:14 root         INFO     Volatility plugins path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\plugins', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\plugins']
+20-06-03 05:04:14 root         INFO     Volatility symbols path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\symbols', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\symbols']
+20-06-03 05:04:14 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\plugins, C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\plugins
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.windows.statistics
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.certificates
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.configwriter
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.frameworkinfo
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.layerwriter
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.timeliner
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.yarascan
+20-06-03 05:04:14 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:04:14 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:04:14 volatility.framework DEBUG    Failed to import module yarascan based on file: yarascan
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.bash
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_afinfo
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_syscall
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.elfs
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsmod
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsof
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.malfind
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.proc
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pslist
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pstree
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.bash
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_syscall
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_sysctl
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_trap_table
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.ifconfig
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsmod
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsof
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.malfind
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.netstat
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.proc_maps
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.psaux
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pslist
+20-06-03 05:04:14 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pstree
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.mac.tasks
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.mac.timers
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.mac.trustedbsd
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.bigpools
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.callbacks
+20-06-03 05:04:15 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:04:15 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:04:15 volatility.framework DEBUG    Failed to import module windows.callbacks based on file: windows\callbacks
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.cmdline
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlldump
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlllist
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverirp
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.filescan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.handles
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.info
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.malfind
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.moddump
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modules
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.mutantscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.poolscanner
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.procdump
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pslist
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.psscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pstree
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.ssdt
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.strings
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.svcscan
+20-06-03 05:04:15 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:04:15 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:04:15 volatility.framework DEBUG    Failed to import module windows.svcscan based on file: windows\svcscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.symlinkscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vaddump
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadinfo
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadyarascan
+20-06-03 05:04:15 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:04:15 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:04:15 volatility.framework DEBUG    Failed to import module windows.vadyarascan based on file: windows\vadyarascan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.verinfo
+20-06-03 05:04:15 volatility.plugins.windows.verinfo INFO     Python pefile module not found, plugin (and dependent plugins) not available
+20-06-03 05:04:15 volatility.framework DEBUG    No module named 'pefile'
+20-06-03 05:04:15 volatility.framework DEBUG    Failed to import module windows.verinfo based on file: windows\verinfo
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.virtmap
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivedump
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivelist
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivescan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.printkey
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.userassist
+20-06-03 05:04:15 root         INFO     The following plugins could not be loaded (use -vv to see why): volatility.plugins.windows.callbacks, volatility.plugins.windows.svcscan, volatility.plugins.windows.vadyarascan, volatility.plugins.windows.verinfo, volatility.plugins.yarascan
+20-06-03 05:04:15 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\automagic
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.construct_layers
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.linux
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.mac
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.pdbscan
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.stacker
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_cache
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_finder
+20-06-03 05:04:15 volatility.framework DEBUG    Importing module: volatility.framework.automagic.windows
+20-06-03 05:05:21 root         INFO     Logging started
+20-06-03 05:05:21 root         INFO     Volatility plugins path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\plugins', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\plugins']
+20-06-03 05:05:21 root         INFO     Volatility symbols path: ['C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\symbols', 'C:\\Users\\james\\Desktop\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\volatility\\framework\\symbols']
+20-06-03 05:05:21 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\plugins, C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\plugins
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.statistics
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.certificates
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.configwriter
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.frameworkinfo
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.layerwriter
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.timeliner
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.yarascan
+20-06-03 05:05:21 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:05:21 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:05:21 volatility.framework DEBUG    Failed to import module yarascan based on file: yarascan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.bash
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_afinfo
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.check_syscall
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.elfs
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsmod
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.lsof
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.malfind
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.proc
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pslist
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.linux.pstree
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.bash
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_syscall
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_sysctl
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.check_trap_table
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.ifconfig
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsmod
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.lsof
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.malfind
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.netstat
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.proc_maps
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.psaux
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pslist
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.pstree
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.tasks
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.timers
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.mac.trustedbsd
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.bigpools
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.callbacks
+20-06-03 05:05:21 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:05:21 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:05:21 volatility.framework DEBUG    Failed to import module windows.callbacks based on file: windows\callbacks
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.cmdline
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlldump
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.dlllist
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverirp
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.driverscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.filescan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.handles
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.info
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.malfind
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.moddump
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.modules
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.mutantscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.poolscanner
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.procdump
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pslist
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.psscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.pstree
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.ssdt
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.strings
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.svcscan
+20-06-03 05:05:21 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:05:21 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:05:21 volatility.framework DEBUG    Failed to import module windows.svcscan based on file: windows\svcscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.symlinkscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vaddump
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadinfo
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.vadyarascan
+20-06-03 05:05:21 volatility.plugins.yarascan INFO     Python Yara module not found, plugin (and dependent plugins) not available
+20-06-03 05:05:21 volatility.framework DEBUG    No module named 'yara'
+20-06-03 05:05:21 volatility.framework DEBUG    Failed to import module windows.vadyarascan based on file: windows\vadyarascan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.verinfo
+20-06-03 05:05:21 volatility.plugins.windows.verinfo INFO     Python pefile module not found, plugin (and dependent plugins) not available
+20-06-03 05:05:21 volatility.framework DEBUG    No module named 'pefile'
+20-06-03 05:05:21 volatility.framework DEBUG    Failed to import module windows.verinfo based on file: windows\verinfo
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.virtmap
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivedump
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivelist
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.hivescan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.printkey
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.plugins.windows.registry.userassist
+20-06-03 05:05:21 root         INFO     The following plugins could not be loaded (use -vv to see why): volatility.plugins.windows.callbacks, volatility.plugins.windows.svcscan, volatility.plugins.windows.vadyarascan, volatility.plugins.windows.verinfo, volatility.plugins.yarascan
+20-06-03 05:05:21 volatility.framework Level 6  Importing from the following paths: C:\Users\james\Desktop\IRCoreForensicFramework\PythonAnalysisList\volatility3\volatility\framework\automagic
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.construct_layers
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.linux
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.mac
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.pdbscan
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.stacker
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_cache
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.symbol_finder
+20-06-03 05:05:21 volatility.framework DEBUG    Importing module: volatility.framework.automagic.windows
