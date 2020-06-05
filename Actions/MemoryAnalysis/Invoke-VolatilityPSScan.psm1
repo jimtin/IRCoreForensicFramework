@@ -1,25 +1,30 @@
-function Invoke-VolatilityProcessList {
+function Invoke-VolatilityPSScan {
     <#
     .SYNOPSIS
-    Runs the PsList, PsScan and PsTree modules from Volatility3
+    Runs the PsScan module from Volatility3
 
     .DESCRIPTION
-    Using the modules from Volatility3, runs PsList, PsScan and PsTree.
+    Using the modules from Volatility3, PsScan then formats output into a Powershell object
     References:
     1. Volatility3: https://github.com/volatilityfoundation/volatility3
-    3. Modules: https://volatility3.readthedocs.io/en/latest/
+    2. Modules: https://volatility3.readthedocs.io/en/latest/
+
+    Target can be selected, but defaults to all targets
     #>
     param (
-        
+        $Targets = ""
     )
     
     # Create output variable
     $output=@{
-        "Object" = "Invoke-VolatilityProcessList"
+        "Object" = "Invoke-VolatilityPSScan"
     }
 
-    # Get the target list
-    $targets = Get-TargetList
+    # If Target not specified, do this operation on all targets
+    if($Targets -eq ""){
+        # Get the target list
+        $targets = Get-TargetList
+    }
 
     # For each target in $targets, run modules sequentially
     foreach($target in $targets){
@@ -32,11 +37,11 @@ function Invoke-VolatilityProcessList {
         # Run volatility command PSScan
         $results = python .\PythonAnalysisList\volatility3\vol.py --file $memfilelocation --output-dir $outputdir windows.psscan.PsScan
         
-        # Filter the results so that only good things are returned. Also, if you're reading this, smile
-        $results = $results[2..$results.Count]
+        # Turn into powershell objects
+        $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
 
-        # Add to output variable
-        $output.Add("PSScanResults", $results)
+        # Add to Output Dictionary
+        $output.Add("PSScanResults", $volatilityobjects)
     }
 
     # Return output to user

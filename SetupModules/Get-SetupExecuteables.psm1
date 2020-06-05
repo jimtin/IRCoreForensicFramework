@@ -23,7 +23,7 @@ function Get-SetupExecuteables{
             Get-Executeable -DownloadURL $exe.DownloadURL -OutputLocation $exe.OutputPath -ExeName $exe.ExecutableName
         }else{
             $exe = ($exe.ExecutableName).ToString()
-            $message = $exe + " is available for HostHunter"
+            $message = "Executeable for HostHunter available: " + $exe 
             Write-ColoredInformation -MessageData $message -ForegroundColor "Blue"
         }
     }
