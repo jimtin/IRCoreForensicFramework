@@ -13,11 +13,19 @@ function Invoke-HostCommand{
     param (
         [Parameter(Mandatory=$true)]$Scriptblock,
         [Parameter()][switch]$RegisterCommand, 
-        [Parameter()]$SimpleCommand
+        [Parameter()]$SimpleCommand,
+        [Parameter()]$Targets=""
     )
 
-    # Get the current list of target powershell sessions
-    $targets = Get-TargetSessions
+    # If Targets are null, select all Targets
+    if($Targets -eq ""){
+        # Get the current list of target powershell sessions
+        $targets = Get-TargetSessions
+    }else{
+        $sessions = Get-TargetSessions 
+        $Targets = $sessions | Where-Object {$_.ComputerName -eq $Targets}
+    }
+    
 
     # Take command and run as a job
     $CommandJob = Invoke-Command -Session $targets -ScriptBlock $Scriptblock -AsJob 

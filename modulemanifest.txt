@@ -9,6 +9,7 @@
 .\CoreEndpointInteraction\Invoke-HostCommand.psm1
 .\CoreEndpointInteraction\New-TooltipNotification.psm1
 .\CoreEndpointInteraction\Remove-Target.psm1
+.\Actions\CreateStagingLocation\New-LocalDataStagingLocation.psm1
 .\Actions\CreateStagingLocation\New-RemoteStagingLocation.psm1
 .\Actions\TransferExecutables\Move-WinPMEM.psm1
 .\Actions\DumpandRetrieveMemory\Invoke-MemoryDump.psm1
@@ -16,5 +17,8 @@
 .\Actions\RetrieveLogsandSRUDB\Copy-RemoteEventLogging.psm1
 .\Actions\RetrieveLogsandSRUDB\Get-RemoteEventLogging.psm1
 .\Actions\SRUProcessing\Format-SRUDB.psm1
-.\Actions\MemoryAnalysis\Invoke-VolatilityPSScan.psm1
-.\Actions\MemoryAnalysis\Format-VolatilityOutput.psm1
+.\Actions\MemoryProcessing\Invoke-VolatilityPSScan.psm1
+.\Actions\MemoryProcessing\Format-VolatilityOutput.psm1
+.\Actions\MemoryProcessing\Invoke-VolatilityPSList.psm1
+.\Actions\MemoryProcessing\Invoke-VolatilityCmdline.psm1
+.\Orchestration\Invoke-TargetArtefactGathering.psm1

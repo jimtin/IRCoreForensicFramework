@@ -1,10 +1,10 @@
-function Invoke-VolatilityPSScan {
+function Invoke-VolatilityCmdline {
     <#
     .SYNOPSIS
-    Runs the PsScan module from Volatility3
+    Runs the Cmdline module from Volatility3
 
     .DESCRIPTION
-    Using the modules from Volatility3, PsScan then formats output into a Powershell object
+    Using the modules from Volatility3, Cmdline then formats output into a Powershell object
     References:
     1. Volatility3: https://github.com/volatilityfoundation/volatility3
     2. Modules: https://volatility3.readthedocs.io/en/latest/
@@ -17,7 +17,7 @@ function Invoke-VolatilityPSScan {
     
     # Create output variable
     $output=@{
-        "Object" = "Invoke-VolatilityPSScan"
+        "Object" = "Invoke-VolatilityCmdline"
     }
 
     # If Target not specified, do this operation on all targets
@@ -28,6 +28,9 @@ function Invoke-VolatilityPSScan {
 
     # For each target in $targets, run modules sequentially
     foreach($target in $targets){
+        $targetobject = @{
+            "Endpoint" = $target
+        }
         # Construct the file location
         $memfilelocation = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\memory.raw"
 
@@ -35,13 +38,26 @@ function Invoke-VolatilityPSScan {
         $outputdir = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\"
 
         # Run volatility command PSScan
-        $results = python .\PythonAnalysisList\volatility3\vol.py --file $memfilelocation --output-dir $outputdir windows.psscan.PsScan
+        $results = python .\PythonAnalysisList\volatility3\vol.py --file $memfilelocation --output-dir $outputdir windows.cmdline
         
         # Turn into powershell objects
         $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
 
-        # Add to Output Dictionary
-        $output.Add("PSScanResults", $volatilityobjects)
+        Write-Host $volatilityobjects
+        Write-Host $volatilityobjects.Values
+
+        # Add to Target Object
+        $targetobject.Add("CmdlineResults", $volatilityobjects)
+
+        # Add to the output variable
+        $output.Add($target, $targetobject)
+
+        # Output to a file in case future forensic work is needed
+        # Create the file string
+        $outfilestring = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\CmdlineResults.json"
+        
+        # Output to the folder
+        $output | ConvertTo-Json -Depth 100 | Out-File $outfilestring
     }
 
     # Return output to user

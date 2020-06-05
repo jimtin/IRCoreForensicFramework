@@ -14,7 +14,7 @@ function Format-VolatilityOutput {
 
     # Reconstruct the results based upon the strings. This will be moved into a separate function when completed
     # Get the title strings
-    $resultstitles = $results[0] -split '\s+'
+    $resultstitles = $results[0] -split '\t'
 
     # Remove the titles from the results string, and trailing new line
     $results = $results[2..$results.Count]

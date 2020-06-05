@@ -8,13 +8,18 @@ function Move-WinPmem{
     
     [CmdletBinding()]
     param (
-        
+        [Parameter()]$targets = ""
     )
     # Set up outcome dictionary
     $outcome = @{}
 
     # Get a list of the sessions
     $sessions = Get-TargetSessions
+
+    # If targets not empty, select the session for the target provided
+    if($targets -ne ""){
+        $sessions = $sessions | Where-Object {$_.ComputerName -eq $targets}
+    }
     
     # Record action for each endpoint
     foreach($session in $sessions){
