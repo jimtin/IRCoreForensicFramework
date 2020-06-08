@@ -9,16 +9,21 @@ function Format-SRUDB {
     
     #>
     param (
-        
+        [Parameter()]$Target = ""
     )
 
     # Create the output dictionary
     $output = @{
-        "Object" = "Format-SRUDB"
+        "HostHunterObject" = "Format-SRUDB"
+        "DateTime" = (Get-Date).ToString()
     }
 
     # Get the endpoint from the target list
     $endpoints = Get-TargetList
+
+    if($Target -ne ""){
+        $endpoints = $Target
+    }
 
     foreach($endpoint in $endpoints){
         # Create dictionary for output

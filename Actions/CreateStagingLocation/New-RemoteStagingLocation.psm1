@@ -14,7 +14,9 @@ function New-RemoteStagingLocation{
 
     # Set up outcome variable
     $outcome = @{
+        "HostHunterObject" = "New-RemoteStagingLocation"
         "StagingLocation" = "C:\PerformanceInformation"
+        "DateTime" = (Get-Date).ToString()
     }
 
     # If a target specified, use this, else do all

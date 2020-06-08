@@ -8,15 +8,17 @@ function Invoke-MemoryDump{
 
     [CmdletBinding()]
     param (
-        
+        [Parameter()]$Target
     )
 
     # Set up outcome variable
     $outcome = @{
         "HostHunterObject" = "Invoke-MemoryDump"
+        "DateTime" = (Get-Date).ToString()
     }
+
     # Run command
-    Invoke-HostCommand -RegisterCommand -ScriptBlock{
+    $memdump = Invoke-HostCommand -Targets $Target -RegisterCommand -ScriptBlock{
         # Create outcome dictionary
         $outcome = @{}
 
@@ -39,7 +41,7 @@ function Invoke-MemoryDump{
         if($disk -gt $ramsize){
             $outcome.Add("EnoughSpace", $true)
             if($path -eq $true){
-                $memdump = C:\PerformanceInformation\mem_info.exe "C:\PerformanceInformation\memory.raw"
+                $memdump = C:\PerformanceInformation\mem_info.exe -o "C:\PerformanceInformation\memory.raw" --format raw --volume_format raw
                 $outcome.Add("MemdumpInfo", $memdump)
             }
         }else{
@@ -49,7 +51,7 @@ function Invoke-MemoryDump{
     } -SimpleCommand "Invoke-MemoryDump"
 
     # Get the output of the command from the global RegisteredCommand variable
-    $memdump = Get-Variable -Name RegisteredCommand -Scope global
+    # $memdump = Get-Variable -Name RegisteredCommand -Scope global
 
     # Add the outcome from the command to the outcome variable
     $outcome.Add("Outcome", $memdump)

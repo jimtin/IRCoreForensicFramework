@@ -8,9 +8,13 @@ function Copy-RemoteEventLogging{
     #>
     [CmdletBinding()]
     param (
+        [Parameter()]$Target = ""
     )
     # Setup overall outcome variable
-    $outcome = @{}
+    $outcome = @{
+        "HostHunterObject" = "Copy-RemoteEventLogging"
+        "DateTime" = (Get-Date).ToString()
+    }
     # Get the timestamp of the command being run
     $outcome.Add("CopyRemoteEventLogsTimestamp", (Get-Date).ToString())
     $copylog = Invoke-HostCommand -ScriptBlock{

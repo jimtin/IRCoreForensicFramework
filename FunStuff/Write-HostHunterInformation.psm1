@@ -1,5 +1,5 @@
 using namespace System.Management.Automation
-function Write-ColoredInformation{
+function Write-HostHunterInformation{
     <#
     .SYNOPSIS
         Writes messages to the information stream, optionally with

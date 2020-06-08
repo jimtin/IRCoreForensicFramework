@@ -17,7 +17,8 @@ function Invoke-VolatilityPSScan {
     
     # Create output variable
     $output=@{
-        "Object" = "Invoke-VolatilityPSScan"
+        "HostHunterObject" = "Invoke-VolatilityPSScan"
+        "DateTime" = (Get-Date).ToString()
     }
 
     # If Target not specified, do this operation on all targets

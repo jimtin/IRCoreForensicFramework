@@ -17,7 +17,8 @@ function Invoke-VolatilityCmdline {
     
     # Create output variable
     $output=@{
-        "Object" = "Invoke-VolatilityCmdline"
+        "HostHunterObject" = "Invoke-VolatilityCmdline"
+        "DateTime" = (Get-Date).ToString()
     }
 
     # If Target not specified, do this operation on all targets

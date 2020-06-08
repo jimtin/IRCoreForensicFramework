@@ -9,14 +9,22 @@ function Get-MemoryDump{
     #>
     [CmdletBinding()]
     param (
-
+        [Parameter()]$Target
     )
 
     # Set up the outcome dictionary
-    $outcome = @{}
+    $outcome = @{
+        "HostHunterObject" = "Get-MemoryDump"
+        "DateTime" = (Get-Date).ToString()
+    }
 
     # Get a list of the sessions
     $sessions = Get-TargetSessions
+
+    # If there is a target, reduce the sessions to that target
+    if($Target -ne ""){
+        $sessions = $sessions | Where-Object {$_.ComputerName -eq $Target}
+    }
 
     # Set up the extraction directory
     $path = Test-Path C:\ExtractionDirectory

@@ -12,12 +12,13 @@ function Invoke-VolatilityPSList {
     Target can be selected, but defaults to all targets
     #>
     param (
-        $Targets = ""
+        [Parameter()]$Targets = ""
     )
     
     # Create output variable
     $output=@{
-        "Object" = "Invoke-VolatilityPSList"
+        "HostHunterObject" = "Invoke-VolatilityPSList"
+        "DateTime" = (Get-Date).ToString()
     }
 
     # If Target not specified, do this operation on all targets

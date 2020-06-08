@@ -2,7 +2,7 @@
 .\SetupModules\Get-SetupExecuteables.psm1
 .\CoreEndpointInteraction\New-EndpointSession.psm1
 .\CoreEndpointInteraction\Remove-EndpointSession.psm1
-.\FunStuff\Write-ColoredInformation.psm1
+.\FunStuff\Write-HostHunterInformation.psm1
 .\CoreEndpointInteraction\Get-TargetList.psm1
 .\CoreEndpointInteraction\New-Target.psm1
 .\CoreEndpointInteraction\Get-TargetSessions.psm1
@@ -21,4 +21,4 @@
 .\Actions\MemoryProcessing\Format-VolatilityOutput.psm1
 .\Actions\MemoryProcessing\Invoke-VolatilityPSList.psm1
 .\Actions\MemoryProcessing\Invoke-VolatilityCmdline.psm1
-.\Orchestration\Invoke-TargetArtefactGathering.psm1
+.\Playbooks\Invoke-TargetArtefactGathering.psm1

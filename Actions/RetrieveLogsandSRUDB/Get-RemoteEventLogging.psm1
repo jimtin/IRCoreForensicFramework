@@ -9,14 +9,22 @@ function Get-RemoteEventLogging{
     #>
     [CmdletBinding()]
     param (
-        
+        [Parameter()]$Target = ""
     )
 
     # Setup the outcome variable
-    $outcome = @{}
+    $outcome = @{
+        "HostHunterObject" = "Get-RemoteEventLogging"
+        "DateTime" = (Get-Date).ToString()
+    }
 
     # Get a list of the sessions
     $sessions = Get-TargetSessions
+
+    # If there's a target, get the target
+    if($Target -ne ""){
+        $sessions = $sessions | Where-Object {$_.ComputerName -eq $Target}
+    }
 
     # Extract the logging artifacts from each endpoint in parallel
     ForEach-Object -InputObject $sessions -Parallel{

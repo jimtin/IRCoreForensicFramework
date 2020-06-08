@@ -1,7 +1,7 @@
 [
     {
         "ExecutableName": "WinPmem.exe",
-        "DownloadURL": "https://github.com/google/rekall/releases/download/v1.3.1/winpmem_1.6.2.exe",
+        "DownloadURL": "https://github.com/Velocidex/c-aff4/releases/download/v3.3.rc3/winpmem_v3.3.rc3.exe",
         "OutputPath": "Executeables"
     },
     {

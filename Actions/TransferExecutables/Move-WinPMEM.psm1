@@ -8,17 +8,20 @@ function Move-WinPmem{
     
     [CmdletBinding()]
     param (
-        [Parameter()]$targets = ""
+        [Parameter()]$target = ""
     )
     # Set up outcome dictionary
-    $outcome = @{}
+    $outcome = @{
+        "HostHunterObject" = "Move-WinPmem"
+        "DateTime" = (Get-Date).ToString()
+    }
 
     # Get a list of the sessions
     $sessions = Get-TargetSessions
 
     # If targets not empty, select the session for the target provided
-    if($targets -ne ""){
-        $sessions = $sessions | Where-Object {$_.ComputerName -eq $targets}
+    if($target -ne ""){
+        $sessions = $sessions | Where-Object {$_.ComputerName -eq $target}
     }
     
     # Record action for each endpoint
