@@ -89,6 +89,12 @@ function Invoke-TargetArtefactGathering {
         $memretrieve = Get-MemoryDump -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("MemDumpRetrieveOutcome", $memretrieve)
+
+        # Get the dumped memory hash on the endpoint and extracted memory dump to ensure that nothing changed during extraction
+        $message = "Endpoint " + $target +": Getting remote memory hash"
+        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $remotehash = Get-RemoteMemoryHash
+        $extractedhash = Get-ExtractedMemoryHash
         
 
         # Copy EventLogs and SRU

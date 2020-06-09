@@ -21,7 +21,7 @@ function New-Target{
         # Check if already in list
         if($GlobalTargetList.ContainsKey($endpoint)){
             $message = "Target " + $endpoint + " already exists"
-            Write-ColoredInformation -MessageData $message
+            Write-HostHunterInformation -MessageData $message
         }else{
             New-EndpointSession -Target $endpoint -Credential $cred
         }

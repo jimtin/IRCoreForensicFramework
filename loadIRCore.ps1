@@ -20,7 +20,7 @@ if((Get-Variable -Name GlobalTargetList -ErrorAction SilentlyContinue) -eq $null
     New-Variable -Name "GlobalTargetList" -Scope global -Visibility Public -Value @{}
 } 
 
-Write-ColoredInformation -MessageData "GlobalTargetList variable set" -ForegroundColor "Blue"
+Write-HostHunterInformation -MessageData "GlobalTargetList variable set" -ForegroundColor "Blue"
 
 # Set up the global credential variable
 if ($cred -eq $null){

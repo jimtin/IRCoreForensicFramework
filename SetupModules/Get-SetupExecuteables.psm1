@@ -24,7 +24,7 @@ function Get-SetupExecuteables{
         }else{
             $exe = ($exe.ExecutableName).ToString()
             $message = "Executeable for HostHunter available: " + $exe 
-            Write-ColoredInformation -MessageData $message -ForegroundColor "Blue"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Blue"
         }
     }
     

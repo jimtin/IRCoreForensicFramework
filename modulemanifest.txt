@@ -22,3 +22,5 @@
 .\Actions\MemoryProcessing\Invoke-VolatilityPSList.psm1
 .\Actions\MemoryProcessing\Invoke-VolatilityCmdline.psm1
 .\Playbooks\Invoke-TargetArtefactGathering.psm1
+.\Actions\DumpandRetrieveMemory\Get-RemoteMemoryHash.psm1
+.\Actions\DumpandRetrieveMemory\Get-ExtractedMemoryHash.psm1

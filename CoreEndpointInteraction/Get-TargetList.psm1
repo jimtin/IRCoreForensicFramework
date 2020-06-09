@@ -16,8 +16,8 @@ function Get-TargetList{
         $message = "No Targets at this time"
     }
     
-    Write-ColoredInformation -MessageData "Targets:" -ForegroundColor "Blue"
-    Write-ColoredInformation -MessageData $message -ForegroundColor "Red"
+    #Write-HostHunterInformation -MessageData "Targets:" -ForegroundColor "Blue"
+    #Write-HostHunterInformation -MessageData $message -ForegroundColor "Red"
 
     Write-Output $message
     

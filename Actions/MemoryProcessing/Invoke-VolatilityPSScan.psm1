@@ -42,7 +42,7 @@ function Invoke-VolatilityPSScan {
         $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
 
         # Add to Target Object
-        $targetobject.Add("PSListResults", $volatilityobjects)
+        $targetobject.Add("PSScanResults", $volatilityobjects)
 
         # Add to the output variable
         $output.Add($target, $targetobject)

@@ -63,7 +63,7 @@ function Invoke-HostCommand{
                 Write-Output $output
                 break
             }else{
-                Write-ColoredInformation -Message "Powershell job still running"
+                Write-HostHunterInformation -Message "Powershell job still running"
             }
             Start-Sleep -Seconds 1
         }while ($true)
