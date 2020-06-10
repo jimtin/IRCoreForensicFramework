@@ -31,7 +31,7 @@ function Get-RemoteMemoryHash {
     # Get the hashes for each session
     foreach($endpoint in $sessions){
         $target = $endpoint.ComputerName
-        $hashvalues = Invoke-HostCommand -Targets $target -Scriptblock{
+        $remotehashvalues = Invoke-HostCommand -Targets $target -Scriptblock{
             # Set up the output variable
             $output = @{
                 "Endpoint" = $env:COMPUTERNAME
@@ -43,15 +43,15 @@ function Get-RemoteMemoryHash {
             $output.Add("SHA256Hash", $sha256hash)
 
             # Get the MD5 hash
-            $md5hash = Get-FileHash -Path C:\PerformanceInformation\memory.raw -Algorithm MD5
-            $output.Add("MD5Hash", $md5hash)
+            #$md5hash = Get-FileHash -Path C:\PerformanceInformation\memory.raw -Algorithm MD5
+            #$output.Add("MD5Hash", $md5hash)
 
             # Return to the Invoke-HostCommand
             Write-Output $output
         }
 
         # Add the outcome to the HashValues dictionary
-        $hashvalues.Add($Target, $hashvalues)
+        $hashvalues.Add($Target, $remotehashvalues)
     }
 
     # Add the outcome of all the hash values to the output

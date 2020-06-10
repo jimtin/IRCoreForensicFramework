@@ -40,8 +40,8 @@ function Get-ExtractedMemoryHash {
         $hashoutput.Add("SHA256Hash", $sha256hash)
 
         # Get the MD5 hash
-        $md5hash = Get-FileHash -Path $path -Algorithm MD5
-        $hashoutput.Add("MD5Hash", $md5hash)
+        #$md5hash = Get-FileHash -Path $path -Algorithm MD5
+        #$hashoutput.Add("MD5Hash", $md5hash)
 
         # Add the outcome to the HashValues dictionary
         $hashvalues.Add($Target, $hashoutput)

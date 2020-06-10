@@ -24,3 +24,5 @@
 .\Playbooks\Invoke-TargetArtefactGathering.psm1
 .\Actions\DumpandRetrieveMemory\Get-RemoteMemoryHash.psm1
 .\Actions\DumpandRetrieveMemory\Get-ExtractedMemoryHash.psm1
+.\Actions\DumpandRetrieveMemory\Compare-MemoryHashes.psm1
+.\Actions\RemoveRemoteArtifacts\Remove-RemoteStagingLocation.psm1

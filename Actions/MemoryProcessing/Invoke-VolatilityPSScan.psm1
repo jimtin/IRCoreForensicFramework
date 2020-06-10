@@ -29,6 +29,9 @@ function Invoke-VolatilityPSScan {
 
     # For each target in $targets, run modules sequentially
     foreach($target in $targets){
+        # Set up the target object
+        $targetobject = @{}
+
         # Construct the file location
         $memfilelocation = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\memory.raw"
 

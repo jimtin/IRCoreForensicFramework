@@ -30,7 +30,7 @@ function New-EndpointSession{
     }
     catch{
         $message = $target + " not created successfully"
-        Write-ColoredInformation -MessageData $message
+        Write-HostHunterInformation -MessageData $message
     }    
     
 }

@@ -91,12 +91,38 @@ function Invoke-TargetArtefactGathering {
         $endpointoutcomes.Add("MemDumpRetrieveOutcome", $memretrieve)
 
         # Get the dumped memory hash on the endpoint and extracted memory dump to ensure that nothing changed during extraction
-        $message = "Endpoint " + $target +": Getting remote memory hash"
+        $message = "Endpoint " + $target +": Comparing remote memory hash against collected memory hash"
         Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Endpoint " + $target +": Getting remote memory hash"
+        Write-HostHunterInformation -MessageData $message
         $remotehash = Get-RemoteMemoryHash
+        $message = "Endpoint " + $target +": Getting local memory hash"
+        Write-HostHunterInformation -MessageData $message
         $extractedhash = Get-ExtractedMemoryHash
+        $hashcompare = Compare-MemoryHashes -RemoteMemoryHash $remotehash -LocalMemoryHash $extractedhash -Target $target
+        if($hashcompare -eq $true){
+            $message = "Endpoint " + $target +": Memory hash comparison successful. Memory file will be processed."
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            # Process the memory dump
+            $message = "Endpoint " + $target +": Processing Memory Dump"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $message = "Endpoint " + $target +": Volatility PSList module processing"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $PSList = Invoke-VolatilityPSList -Targets $target
+            $endpointoutcomes.Add("VolatilityPSListOutcome", $PSList)
+            $message = "Endpoint " + $target +": Volatility PSScan module processing"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $PSScan = Invoke-VolatilityPSScan -Targets $target
+            $endpointoutcomes.Add("VolatilityPsScanOutcome", $PSScan)
+            $message = "Endpoint " + $target +": Volatility Cmdline module processing"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $cmdline = Invoke-VolatilityCmdline -Targets $target
+            $endpointoutcomes.Add("VolatilityCmdlineOutcome", $cmdline)
+        }else{
+            $message = "Endpoint " + $target +": Memory hash comparison failed. Memory file corrupted, try again"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Red"
+        }
         
-
         # Copy EventLogs and SRU
         $message = "Endpoint " + $target +": Getting event logging"
         Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
@@ -104,7 +130,6 @@ function Invoke-TargetArtefactGathering {
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("RemoteEventLogCopyOutcome", $copylogs)
         
-
         # Retrieve EventLogs and SRU
         $message = "Endpoint " + $target +": Retrieving EventLogs and SRUDB"
         Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
@@ -112,24 +137,18 @@ function Invoke-TargetArtefactGathering {
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("RemoteEventLogRetrievalOutcome", $retrievelogs)
         
-
         # Process the SRU 
         $message = "Endpoint " + $target +": Formatting SRUDB"
         Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
         $sruprocessing = Format-SRUDB -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("FormatSRUDBOutcome", $sruprocessing)
-        
 
-        # Process the memory dump
-        $message = "Endpoint " + $target +": Processing Memory Dump"
+        # Remove the Remote Staging location from Target endpoint
+        $message = "Endpoint " + $target +": Removing remote staging location"
         Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
-        $PSList = Invoke-VolatilityPSList -Targets $target
-        $endpointoutcomes.Add("VolatilityPSListOutcome", $PSList)
-        $PSScan = Invoke-VolatilityPSScan -Targets $target
-        $endpointoutcomes.Add("VolatilityPsScanOutcome", $PSScan)
-        $cmdline = Invoke-VolatilityCmdline -Targets $target
-        $endpointoutcomes.Add("VolatilityCmdlineOutcome", $cmdline)
+        $remove = Remove-RemoteStagingLocation
+        $endpointoutcomes.Add("RemoteStagingLocationOutcome", $remove)
 
         # Add all of these results to the output variable
         $output.Add($target, $endpointoutcomes)
