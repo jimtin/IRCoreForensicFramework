@@ -36,16 +36,16 @@ This playbook takes one of the most common and frustrating experiences with Inci
 3. Pushes winpmem across to the remote endpoint
 4. *Checks if there is enough space on the endpoint to dump memory*
 5. Dumps memory
-* Extracts the following artefacts to your remote endpoint: 
+6. Extracts the following artefacts to your remote endpoint: 
     * Memory Dump to your endpoint (and confirms that the hash of what was dumped matches what actually ends up on your machine)
-    b. All the event logs (i.e. the entire event log folder, not just the event logs that some random engineering team thinks are what you need)
-    c. SRUM database (i.e. the forensic artifact which could allow you to a link a user, process and network activity together)
+    * All the event logs (i.e. the entire event log folder, not just the event logs that some random engineering team thinks are what you need)
+    * SRUM database (i.e. the forensic artifact which could allow you to a link a user, process and network activity together)
 7. Processes each artefact using industry standard tools, dropping the output into a .json file for each one
-    a. Memory Dump: Uses (https://github.com/volatilityfoundation/volatility3 "Volatility3") to do the following processing (more to come)
-        i. PSList
-        ii. PSScan
-        iii. Cmdline
-    b. SRU DB: Uses Mark Baggetts excellent (https://github.com/MarkBaggett/srum-dump "srum-dump") tool to process the SRUDB
+    * Memory Dump: Uses (https://github.com/volatilityfoundation/volatility3 "Volatility3") to do the following processing (more to come)
+        * PSList
+        * PSScan
+        * Cmdline
+    * SRU DB: Uses Mark Baggetts excellent (https://github.com/MarkBaggett/srum-dump "srum-dump") tool to process the SRUDB
 8. Finishes up by going and deleting the Remote Staging location so that the endpoint doesn't get all clogged up by what you've done
 
 Pretty awesome. And it's just the start. Using this platform, significant post-processing is also available :) 
@@ -54,6 +54,6 @@ Pretty awesome. And it's just the start. Using this platform, significant post-p
 1. Integrate the ability to zip using native windows tools
 2. Integrate the ability to automatically upload to cloud storage (likely Amazon s3)
 3. Integrate more forensic artifacts:
-    a. Registry Hive 
-    b. Prefetch
+    * Registry Hive 
+    * Prefetch
 4. Start doing some basic post-processing analysis to make IR jobs even easier
