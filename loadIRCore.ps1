@@ -12,8 +12,13 @@ foreach ($cmdlet in $modules){
 }
 
 # Ensure executables which will help are downloaded 
-Write-Information -InformationAction Continue -MessageData "Checking core executeables are downloaded"
+Write-HostHunterInformation -MessageData "Checking core executeables are downloaded"
 Get-SetupExecuteables
+
+# Ensure Volatility3 Symbols tables are downloaded
+Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
+Import-VolatilitySymbols
+
 
 # Set up the target tracking variable
 if((Get-Variable -Name GlobalTargetList -ErrorAction SilentlyContinue) -eq $null){

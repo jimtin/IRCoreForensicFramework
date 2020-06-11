@@ -6,37 +6,54 @@ function Import-VolatilitySymbols {
     .DESCRIPTION
     Imports the required symbol tables for volatility3. Used in this module as this is a large download and a bit different from standard executeable import
     #>
+    [CmdletBinding()]
     param (
         
     )
+
+    # Setup the file path
+    $location = (Get-Location).ToString()
+    $location = $location + "\PythonAnalysisList\volatility3\volatility\symbols\"
  
     #### Windows Symbol table
     # Test if windows path already exists
-    $windows = Test-Path -Path "\PythonAnalysisList\volatility3\volatility\symbols\windows"
+    $winloc = $location + "windows"
+    $windows = Test-Path -Path $winloc
 
     # If it does not exist, download
     if($windows -ne $true){
         Write-HostHunterInformation -MessageData "Downloading Windows symbol tables for Volatility 3" -ForegroundColor "Yellow"
-        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip" -OutFile "\PythonAnalysisList\volatility3\volatility\symbols\windows.zip"
+        $windownload = $location + "windows.zip"
+        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip" -OutFile $windownload
     }
+
+    Write-HostHunterInformation -MessageData "Windows Symbol Tables available" -ForegroundColor "Cyan"
 
     #### Mac Symbol tables
     # Test if Mac symbol tables already downloaded
-    $mac = Test-Path -Path "\PythonAnalysisList\volatility3\volatility\symbols\mac"
+    $macloc = $location + "mac"
+    $mac = Test-Path -Path $macloc
 
     # If it does not exist, download
     if($mac -ne $true){
         Write-HostHunterInformation -MessageData "Downloading Mac symbol tables for Volatility 3" -ForegroundColor "Yellow"
-        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -OutFile "\PythonAnalysisList\volatility3\volatility\symbols\mac.zip"
+        $macdownload = $location + "mac.zip"
+        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -OutFile $macdownload
     }
+
+    Write-HostHunterInformation -MessageData "Mac Symbol Tables available" -ForegroundColor "Cyan"
 
     #### Linux symbol tables
     # Test if Linux symbol tables already downloaded
-    $linux = Test-Path -Path "\PythonAnalysisList\volatility3\volatility\symbols\linux"
+    $linuxloc = $location + "linux"
+    $linux = Test-Path -Path $linuxloc
 
-    if($mac -ne $true){
+    if($linux -ne $true){
         Write-HostHunterInformation -MessageData "Downloading Linux symbol tables for Volatility 3" -ForegroundColor "Yellow"
-        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -OutFile "\PythonAnalysisList\volatility3\volatility\symbols\linux.zip"
+        $linuxdownload = $location + "linux.zip"
+        Invoke-WebRequest -Uri "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -OutFile $linuxdownload
     }
+
+    Write-HostHunterInformation -MessageData "Linux Symbol Tables available" -ForegroundColor "Cyan"
 
 }
