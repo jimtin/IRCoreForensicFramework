@@ -16,12 +16,11 @@ Write-HostHunterInformation -MessageData "Checking core executeables are downloa
 Get-SetupExecuteables
 
 # Copy Volatility across
-$volatility = Copy-Volatility
+Copy-Volatility
 
 # Ensure Volatility3 Symbols tables are downloaded
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
 Import-VolatilitySymbols
-
 
 # Set up the target tracking variable
 if((Get-Variable -Name GlobalTargetList -ErrorAction SilentlyContinue) -eq $null){
