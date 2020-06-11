@@ -36,7 +36,7 @@ function Format-SRUDB {
         $endpointdict.Add("InputLocation", $inputloc)
 
         # Create the output location
-        $outputloc =  "C:\ExtractionDirectory\" + $endpoint + "_ForensicArtifacts\EventLoggingandSRU\ProcessedOutcomes\sru_database.xlsx"
+        $outputloc =  "C:\ExtractionDirectory\" + $endpoint + "_ForensicArtifacts\sru_database.xlsx"
         
         # Add to the output object
         $endpointdict.Add("OutputLocation", $outputloc)
