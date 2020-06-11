@@ -2,25 +2,25 @@
 Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Built by incident responders for incident responders. 
 
 ## Core Concepts
-1. Laser focused on automating incident response actions, rather than system monitoring. Aims to eliminate Tier I and Tier II adversaries described in the article *Resilient Military Systems and the Advanced Cyber Threat* (https://nsarchive2.gwu.edu/NSAEBB/NSAEBB424/docs/Cyber-081.pdf)
-2. Tightly controlled and well recorded interation with remote systems 
-3. Fun and interesting
+* Laser focused on automating incident response actions, rather than system monitoring. Aims to eliminate Tier I and Tier II adversaries described in the article *Resilient Military Systems and the Advanced Cyber Threat* (https://nsarchive2.gwu.edu/NSAEBB/NSAEBB424/docs/Cyber-081.pdf)
+* Tightly controlled and well recorded interation with remote systems 
+* Fun and interesting
 
 ## Setup (What you need to use)
 1. Your own endpoint with the following installed: 
-    a. Powershell Core 
-    b. Python 3.7 (minimum)
-    c. Plenty of storage space (I'd recommend at least 100Gb if you're looking to extract memory)
-    d. Plenty of processing power. (I'd recommend at least a 9th generation i5 or AMD equivalent)
+    * Powershell Core 
+    * Python 3.7 (minimum)
+    * Plenty of storage space (I'd recommend at least 100Gb if you're looking to extract memory)
+    * Plenty of processing power. (I'd recommend at least a 9th generation i5 or AMD equivalent)
 2. Reasonable Powershell experience. This program is currently in Beta, so there's likely to be a bit of interaction to use it.
 
 ## How to use
 1. Clone repository into your own directory
 2. Open Powershell Core as administrator
 3. Run the loadIRCore script. `.\loadIRCore.ps1` 
-    a. Note: If you are not an Administrator, you will be prompted to restart console as admin
-    b. This script will download a number of files for you. Take time to understand what is being downloaded. 
-    c. You will be prompted for credentials. 
+    * Note: If you are not an Administrator, you will be prompted to restart console as admin
+    * This script will download a number of files for you. Take time to understand what is being downloaded. 
+    * You will be prompted for credentials. 
 4. Create a target: `New-Target -Target 127.0.0.1`
 5. Start running commands against the target. For instance if you want to get a range of basic forensic artifacts, try the Playbook TargetArtefactGathering: `Invoke-TargetArtefactGathering`
 
