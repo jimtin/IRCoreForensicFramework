@@ -36,8 +36,8 @@ This playbook takes one of the most common and frustrating experiences with Inci
 3. Pushes winpmem across to the remote endpoint
 4. *Checks if there is enough space on the endpoint to dump memory*
 5. Dumps memory
-6. Extracts the following artefacts to your remote endpoint: 
-    a. Memory Dump to your endpoint (and confirms that the hash of what was dumped matches what actually ends up on your machine)
+* Extracts the following artefacts to your remote endpoint: 
+    * Memory Dump to your endpoint (and confirms that the hash of what was dumped matches what actually ends up on your machine)
     b. All the event logs (i.e. the entire event log folder, not just the event logs that some random engineering team thinks are what you need)
     c. SRUM database (i.e. the forensic artifact which could allow you to a link a user, process and network activity together)
 7. Processes each artefact using industry standard tools, dropping the output into a .json file for each one
