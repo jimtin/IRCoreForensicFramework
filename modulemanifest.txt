@@ -27,3 +27,4 @@
 .\Actions\DumpandRetrieveMemory\Compare-MemoryHashes.psm1
 .\Actions\RemoveRemoteArtifacts\Remove-RemoteStagingLocation.psm1
 .\SetupModules\Import-VolatilitySymbols.psm1
+.\SetupModules\Copy-Volatility.psm1

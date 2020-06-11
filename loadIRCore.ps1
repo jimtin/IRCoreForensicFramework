@@ -15,6 +15,9 @@ foreach ($cmdlet in $modules){
 Write-HostHunterInformation -MessageData "Checking core executeables are downloaded"
 Get-SetupExecuteables
 
+# Copy Volatility across
+$volatility = Copy-Volatility
+
 # Ensure Volatility3 Symbols tables are downloaded
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
 Import-VolatilitySymbols
