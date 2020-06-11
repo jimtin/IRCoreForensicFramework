@@ -28,3 +28,4 @@
 .\Actions\RemoveRemoteArtifacts\Remove-RemoteStagingLocation.psm1
 .\SetupModules\Import-VolatilitySymbols.psm1
 .\SetupModules\Copy-Volatility.psm1
+.\SetupModules\Set-PythonAnalysisList.psm1
