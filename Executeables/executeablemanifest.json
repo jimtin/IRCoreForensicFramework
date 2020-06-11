@@ -15,8 +15,13 @@
         "OutputPath": "Executeables"
     }, 
     {
-        "ExecutableName": "volatility3",
-        "DownloadURL": "https://github.com/volatilityfoundation/volatility3.git",
+        "ExecutableName": "volatility3.zip",
+        "DownloadURL": "https://github.com/volatilityfoundation/volatility3/archive/master.zip",
         "OutputPath": "Executeables"
+    },
+    {
+        "ExecutableName": "windows.zip",
+        "DownloadURL": "https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip",
+        "OutputPath": "PythonAnalysis\\volatility3\\volatility\\symbols"
     }
 ]

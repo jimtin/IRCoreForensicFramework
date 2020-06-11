@@ -26,7 +26,7 @@ function Get-Executeable{
     
     # Notify the user
     $message = "Downloading " + $ExeName + " to " + $outputpath
-    Write-Information -InformationAction Continue -MessageData $message
+    Write-HostHunterInformation -MessageData $message
 
     # Invoke the Web Request to download
     $download = Invoke-WebRequest -Uri $DownloadURL -OutFile $outputpath
