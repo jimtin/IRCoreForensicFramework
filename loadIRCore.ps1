@@ -23,7 +23,7 @@ while($analysis -ne $true){
 }
 
 # Copy Volatility into python analysis folder
-Copy-Volatility
+$volatility = Copy-Volatility
 
 # Import Volatility3 Symbols tables for all operating systems
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
