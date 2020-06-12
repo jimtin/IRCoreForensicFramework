@@ -9,7 +9,7 @@ function Get-MemoryDump{
     #>
     [CmdletBinding()]
     param (
-        [Parameter()]$Target
+        [Parameter()]$Target = ""
     )
 
     # Set up the outcome dictionary

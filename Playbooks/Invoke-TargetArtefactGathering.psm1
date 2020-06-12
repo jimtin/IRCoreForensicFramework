@@ -37,7 +37,7 @@ function Invoke-TargetArtefactGathering {
     }
 
     # Check that current endpoint has a local data staging location set up
-    New-LocalDataStagingLocation
+    $localdata = New-LocalDataStagingLocation
     
 
     # Now set off the orchestration.
