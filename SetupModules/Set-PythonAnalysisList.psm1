@@ -21,5 +21,9 @@ function Set-PythonAnalysisList {
     if($path -ne $true){
         New-Item -Path $Location -Name PythonAnalysisList -ItemType Directory
     }
+
+    $path = Test-Path -Path $folder
+
+    Write-Output $path
     
 }

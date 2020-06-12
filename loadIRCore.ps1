@@ -16,7 +16,11 @@ Write-HostHunterInformation -MessageData "Checking core executeables are downloa
 Get-SetupExecuteables
 
 # Set up the Python analysis folder
-$directory = Set-PythonAnalysisList
+$analysis = Set-PythonAnalysisList
+while($analysis -ne $true){
+    Start-Sleep -Seconds 1
+    $analysis = Set-PythonAnalysisList
+}
 
 # Copy Volatility into python analysis folder
 Copy-Volatility
