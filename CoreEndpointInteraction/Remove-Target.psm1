@@ -23,7 +23,7 @@ function Remove-Target{
         }
 
         # Inform user
-        Write-ColoredInformation -MessageData $message
+        Write-HostHunterInformation -MessageData $message
     }
 
     # At the end of adding them all all, give the user a list of targets

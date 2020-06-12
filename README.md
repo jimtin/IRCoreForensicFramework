@@ -5,6 +5,7 @@ Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Buil
 * Laser focused on automating incident response actions, rather than system monitoring. Aims to eliminate Tier I and Tier II adversaries described in the article *Resilient Military Systems and the Advanced Cyber Threat* (https://nsarchive2.gwu.edu/NSAEBB/NSAEBB424/docs/Cyber-081.pdf)
 * Tightly controlled and well recorded interation with remote systems 
 * Fun and interesting
+* No need to use a host agent - this tool uses living off the land techniques, combined with the WinPmem executeable
 
 ## Setup (What you need to use)
 1. Your own endpoint with the following installed: 
@@ -24,11 +25,15 @@ Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Buil
 4. Create a target: `New-Target -Target 127.0.0.1`
 5. Start running commands against the target. For instance if you want to get a range of basic forensic artifacts, try the Playbook TargetArtefactGathering: `Invoke-TargetArtefactGathering`
 
-## A cool example of what happens when you combine operational experience with engineering expertise to automate common Incident Response Processes
+## Assumptions
+* You have administrative access to your network 
+* The access you use on your network is secure
+
+## A cool example of what happens when you combine operational experience with engineering expertise to automate common Incident Response processes
 
 ### Playbook: Invoke-TargetArtefactGathering
 #### Overview
-This playbook takes one of the most common and frustrating experiences with Incident Response and automates the entire process of gathering common forensic artefacts, combining them together and putting them in one place to be processed. Despite this being one of the most common asks from Incident Responders, no tool on the market is as seamless to use as this. 
+This playbook takes one of the most common and frustrating experiences with Incident Response and automates the entire process. This playbook gathers common forensic artefacts, combines them together and locates them in one place to be processed. Despite this being one of the most common asks from Incident Responders, no tool on the market is as seamless to use as this. Best of all: it's easily extended to gather more artifacts and process them.  
 
 #### What it does
 1. Records all actions it does, so that when you inevitably need to figure out what has happened on the endpoint, you know which actions were you and which were the adversaries. 
