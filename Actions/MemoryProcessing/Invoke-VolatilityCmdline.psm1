@@ -44,9 +44,6 @@ function Invoke-VolatilityCmdline {
         # Turn into powershell objects
         $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
 
-        Write-Host $volatilityobjects
-        Write-Host $volatilityobjects.Values
-
         # Add to Target Object
         $targetobject.Add("CmdlineResults", $volatilityobjects)
 

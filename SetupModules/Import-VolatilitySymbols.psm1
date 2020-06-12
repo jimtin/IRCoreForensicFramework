@@ -17,7 +17,7 @@ function Import-VolatilitySymbols {
  
     #### Windows Symbol table
     # Test if windows path already exists
-    $winloc = $location + "windows"
+    $winloc = $location + "windows.zip"
     $windows = Test-Path -Path $winloc
 
     # If it does not exist, download
@@ -31,7 +31,7 @@ function Import-VolatilitySymbols {
 
     #### Mac Symbol tables
     # Test if Mac symbol tables already downloaded
-    $macloc = $location + "mac"
+    $macloc = $location + "mac.zip"
     $mac = Test-Path -Path $macloc
 
     # If it does not exist, download
@@ -45,7 +45,7 @@ function Import-VolatilitySymbols {
 
     #### Linux symbol tables
     # Test if Linux symbol tables already downloaded
-    $linuxloc = $location + "linux"
+    $linuxloc = $location + "linux.zip"
     $linux = Test-Path -Path $linuxloc
 
     if($linux -ne $true){

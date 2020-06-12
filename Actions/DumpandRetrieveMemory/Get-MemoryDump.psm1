@@ -47,7 +47,7 @@ function Get-MemoryDump{
         # Get Destination Directory path
         $ExtractionPath = "C:\ExtractionDirectory\" + $DirectoryName
 
-        # Actually copy the item finally
+        # Actually copy the item finally as a job
         Copy-Item -FromSession $sesh -Path C:\PerformanceInformation\memory.raw -Destination $ExtractionPath
 
     } 
