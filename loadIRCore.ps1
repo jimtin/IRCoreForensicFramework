@@ -15,10 +15,13 @@ foreach ($cmdlet in $modules){
 Write-HostHunterInformation -MessageData "Checking core executeables are downloaded"
 Get-SetupExecuteables
 
-# Copy Volatility across
+# Set up the Python analysis folder
+$directory = Set-PythonAnalysisList
+
+# Copy Volatility into python analysis folder
 Copy-Volatility
 
-# Ensure Volatility3 Symbols tables are downloaded
+# Import Volatility3 Symbols tables for all operating systems
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
 Import-VolatilitySymbols
 

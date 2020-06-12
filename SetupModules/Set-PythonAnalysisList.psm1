@@ -1,4 +1,4 @@
-function Set-PythonAnalysisFolder {
+function Set-PythonAnalysisList {
     <#
     .SYNOPSIS
     Sets the PythonAnalysisFolder up
@@ -14,12 +14,12 @@ function Set-PythonAnalysisFolder {
     $Location = (Get-Location).ToString()
 
     # Test the path
-    $folder = $Location + "\PythonAnalysisFolder"
+    $folder = $Location + "\PythonAnalysisList"
     $path = Test-Path -Path $folder
 
     # If it's not there, create it
     if($path -ne $true){
-        New-Item -Path $Location -Name PythonAnalysisFolder -ItemType Directory
+        New-Item -Path $Location -Name PythonAnalysisList -ItemType Directory
     }
     
 }
