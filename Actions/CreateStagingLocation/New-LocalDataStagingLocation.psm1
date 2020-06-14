@@ -11,7 +11,7 @@ function New-LocalDataStagingLocation{
     $staginglocation = Test-Path -Path "C:\ExtractionDirectory"
 
     if($staginglocation -ne $true){
-        Write-HostHunterInformation -MessageData "Creating local data staging location" -ForegroundColor "Cyan"
+        # Write-HostHunterInformation -MessageData "Creating local data staging location" -ForegroundColor "Cyan"
         New-Item -Path C:\ -Name "ExtractionDirectory" -ItemType "directory"
     }
 }

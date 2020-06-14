@@ -64,8 +64,6 @@ function New-RemoteStagingLocation{
         $outcome.Add("EndpointOutcomes", $pathexists)
     }
 
-    
-
     # Return results to pwsh
     Write-Output $outcome
 }

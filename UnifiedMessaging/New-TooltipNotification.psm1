@@ -10,8 +10,8 @@ function New-TooltipNotification{
 
     [CmdletBinding()]
     param (
-        [Parameter(HelpMessage="The message title")]$MessageTitle="Powershell Job Update",
-        [Parameter(HelpMessage="The body of text to be displayed in message")]$Message="Powershell job completed"
+        [Parameter(HelpMessage="The message title")]$MessageTitle="HostHunter Update",
+        [Parameter(HelpMessage="The body of text to be displayed in message")]$MessageData="Powershell job completed"
     )
 
     # Add the assembly name required for use
@@ -35,13 +35,12 @@ function New-TooltipNotification{
     $SysTrayIconPath='C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
 
     # Create Icon for the tray
-    # $path = Get-Process -id $pid | Select-Object -ExpandProperty Path
     $balloon.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon($SysTrayIconPath)
 
     $MessageType = "Info"
     # Set up tip text and icons
     $balloon.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]$MessageType
-    $balloon.BalloonTipText  = $Message
+    $balloon.BalloonTipText  = $MessageData
     $balloon.BalloonTipTitle = $MessageTitle
     $balloon.Visible = $true
 

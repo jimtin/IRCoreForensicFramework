@@ -19,11 +19,11 @@ function Compare-MemoryHashes {
     # Compare SHA256 Hashes
     if($RemoteMemoryHash.HashValues[$Target].SHA256Hash.Hash -eq  $LocalMemoryHash.HashValues[$Target].SHA256Hash.Hash){
         $message = "Memory Hash comparison for " + $Target + ": Matched"
-        Write-HostHunterInformation -MessageData $message
+        # Write-HostHunterInformation -MessageData $message
         $outcome = $true
     }else{
         $message = "Memory Hash comparison for " + $Target + ": Failed"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Red"
+        # Write-HostHunterInformation -MessageData $message -ForegroundColor "Red"
     }
 
     # Return outcome to the user

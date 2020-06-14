@@ -14,7 +14,8 @@ function Invoke-HostCommand{
         [Parameter(Mandatory=$true)]$Scriptblock,
         [Parameter()][switch]$RegisterCommand, 
         [Parameter()]$SimpleCommand,
-        [Parameter()]$Targets=""
+        [Parameter()]$Targets="",
+        [Parameter()][switch]$silent
     )
 
     # If Targets are null, select all Targets
@@ -41,7 +42,7 @@ function Invoke-HostCommand{
         $MessageTitle = $SimpleCommand + " Remote Job"
         # Update the message
         $Message = "Powershell job " + $SimpleCommand + " started"
-        New-ToolTipNotification -MessageTitle $MessageTitle -Message $Message
+        New-ToolTipNotification -MessageTitle $MessageTitle -MessageData $Message
         Register-ObjectEvent -InputObject $CommandJob -EventName StateChanged -Action {
             if($sender.State -eq "Completed"){
                 $MessageTitle = $SimpleCommand + " Remote Job"
@@ -63,9 +64,14 @@ function Invoke-HostCommand{
                 Write-Output $output
                 break
             }else{
-                Write-HostHunterInformation -Message "Powershell job still running"
+                if($silent){
+                    
+                }else{
+                    Write-HostHunterInformation -MessageData "Powershell job still running"
+                }
+                Start-Sleep -Seconds 1
             }
-            Start-Sleep -Seconds 1
+            
         }while ($true)
     }
 }

@@ -52,24 +52,24 @@ function Invoke-TargetArtefactGathering {
         $targetsession = $targetsession | Where-Object {$_.ComputerName -eq $target}
 
         # Create the remote staging location
-        $message = "Endpoint " + $target +": Setting up remote staging location"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $messagetitle = "Target: " + $target 
+        $message = "Setting up remote staging location"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -TooltipNotification
         $staginglocation = New-RemoteStagingLocation -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("RemoteStagingOutcome", $staginglocation)
         
 
         # Move WinPMEM across
-        $message = "Endpoint " + $target +": Moving across WinPmem"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Moving across WinPmem"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $winpmem = Move-WinPmem -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("WinPmemMoveOutcome", $winpmem)
-        
 
         # Invoke dumping memory
-        $message = "Endpoint " + $target +": Dumping Memory"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Dumping Memory"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $memdump = Invoke-MemoryDump -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("MemDumpOutcome", $memdump)
@@ -78,44 +78,43 @@ function Invoke-TargetArtefactGathering {
         $session = Get-PSSession | Where-Object {$_.ComputerName -eq $target}
         while ($session.Availability -ne "Available") {
             $message = "Remote Session " + $session.ComputerName + ": " + $session.Availability + " dumping memory"
-            Write-HostHunterInformation -MessageData $message
             Start-Sleep -Seconds 2
             $session = Get-PSSession | Where-Object {$_.ComputerName -eq $target}
         }
 
         # Retrieve Memory
-        $message = "Endpoint " + $target +": Retrieving memory dump"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Retrieving memory dump"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $memretrieve = Get-MemoryDump -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("MemDumpRetrieveOutcome", $memretrieve)
 
         # Get the dumped memory hash on the endpoint and extracted memory dump to ensure that nothing changed during extraction
-        $message = "Endpoint " + $target +": Comparing remote memory hash against collected memory hash"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
-        $message = "Endpoint " + $target +": Getting remote memory hash"
-        Write-HostHunterInformation -MessageData $message
+        $message = "Comparing remote memory hash against collected memory hash"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
+        $message = "Getting remote memory hash"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $remotehash = Get-RemoteMemoryHash
-        $message = "Endpoint " + $target +": Getting local memory hash"
-        Write-HostHunterInformation -MessageData $message
+        $message = "Getting local memory hash"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $extractedhash = Get-ExtractedMemoryHash
         $hashcompare = Compare-MemoryHashes -RemoteMemoryHash $remotehash -LocalMemoryHash $extractedhash -Target $target
         if($hashcompare -eq $true){
-            $message = "Endpoint " + $target +": Memory hash comparison successful. Memory file will be processed."
-            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $message = "Memory hash comparison successful. Processing memory file"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
             # Process the memory dump
-            $message = "Endpoint " + $target +": Processing Memory Dump"
-            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
-            $message = "Endpoint " + $target +": Volatility PSList module processing"
-            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $message = "Processing Memory Dump"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
+            $message = "Volatility PSList module processing"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
             $PSList = Invoke-VolatilityPSList -Targets $target
             $endpointoutcomes.Add("VolatilityPSListOutcome", $PSList)
-            $message = "Endpoint " + $target +": Volatility PSScan module processing"
-            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $message = "Volatility PSScan module processing"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
             $PSScan = Invoke-VolatilityPSScan -Targets $target
             $endpointoutcomes.Add("VolatilityPsScanOutcome", $PSScan)
-            $message = "Endpoint " + $target +": Volatility Cmdline module processing"
-            Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+            $message = "Volatility Cmdline module processing"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
             $cmdline = Invoke-VolatilityCmdline -Targets $target
             $endpointoutcomes.Add("VolatilityCmdlineOutcome", $cmdline)
         }else{
@@ -124,29 +123,29 @@ function Invoke-TargetArtefactGathering {
         }
         
         # Copy EventLogs and SRU
-        $message = "Endpoint " + $target +": Getting event logging"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Getting event logging"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $copylogs = Copy-RemoteEventLogging -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("RemoteEventLogCopyOutcome", $copylogs)
         
         # Retrieve EventLogs and SRU
-        $message = "Endpoint " + $target +": Retrieving EventLogs and SRUDB"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Retrieving EventLogs and SRUDB"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $retrievelogs = Get-RemoteEventLogging -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("RemoteEventLogRetrievalOutcome", $retrievelogs)
         
         # Process the SRU 
-        $message = "Endpoint " + $target +": Formatting SRUDB"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Formatting SRUDB"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $sruprocessing = Format-SRUDB -Target $target
         # Add outcome to endpointoutcomes variable
         $endpointoutcomes.Add("FormatSRUDBOutcome", $sruprocessing)
 
         # Remove the Remote Staging location from Target endpoint
-        $message = "Endpoint " + $target +": Removing remote staging location"
-        Write-HostHunterInformation -MessageData $message -ForegroundColor "Cyan"
+        $message = "Removing remote staging location"
+        Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -ToolTipNotification
         $remove = Remove-RemoteStagingLocation
         $endpointoutcomes.Add("RemoteStagingLocationOutcome", $remove)
 

@@ -31,7 +31,7 @@ function Get-RemoteMemoryHash {
     # Get the hashes for each session
     foreach($endpoint in $sessions){
         $target = $endpoint.ComputerName
-        $remotehashvalues = Invoke-HostCommand -Targets $target -Scriptblock{
+        $remotehashvalues = Invoke-HostCommand -Silent -Targets $target -Scriptblock{
             # Set up the output variable
             $output = @{
                 "Endpoint" = $env:COMPUTERNAME
