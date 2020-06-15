@@ -40,6 +40,38 @@ function Invoke-ParallelTargetArtefactGathering {
     # Check that current endpoint has a local data staging location set up
     $localdata = New-LocalDataStagingLocation
 
+    foreach($target in $targets){
+        $name = $target + ": ArtefactCollectionPlaybook"
 
+        # Set up the root for importing modules
+        $env:WhereAmI = Get-Location
+        Start-Job -Name $name -InitializationScript{
+            # Get a list of all Host Hunter modules
+            $content = Get-Content -Path "$env:WhereAmI\modulemanifest.txt"
+
+            # Import into the current job
+            foreach($cmdlet in $content){
+                Import-Module $cmdlet -Force
+            }
+
+        } -ScriptBlock{
+            # Create the endpoint dictionary
+            $endpointoutcomes = @{
+                "HostName" = $target
+            }
+
+            # Get the targets sessions from the session list
+            $targetsession = Get-PSSession | Where-Object {$_.Name -eq $target}
+
+            # Create the remote staging location
+            $messagetitle = "Target: " + $target 
+            $message = "Setting up remote staging location"
+            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -TooltipNotification
+            $staginglocation = New-RemoteStagingLocation -Target $target
+            # Add outcome to endpointoutcomes variable
+            $endpointoutcomes.Add("RemoteStagingOutcome", $staginglocation)
+            Write-Output $staginglocation
+        }
+    }
 
 }

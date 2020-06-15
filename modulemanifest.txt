@@ -29,3 +29,6 @@
 .\SetupModules\Import-VolatilitySymbols.psm1
 .\SetupModules\Copy-Volatility.psm1
 .\SetupModules\Set-PythonAnalysisList.psm1
+.\Playbooks\Invoke-ParallelTargetArtefactGathering.psm1
+.\CoreEndpointInteraction\Invoke-PlaybookCommand.psm1
+.\Actions\WindowsRegistry\Copy-WindowsRegistry.psm1

@@ -2,6 +2,7 @@ function Copy-RemoteEventLogging{
     <#
     .SYNOPSIS
     Copies the remote event logs into the performance information folder
+
     .DESCRIPTION
     Copies the remote event logs into the performance information folder
     
@@ -17,7 +18,7 @@ function Copy-RemoteEventLogging{
     }
     # Get the timestamp of the command being run
     $outcome.Add("CopyRemoteEventLogsTimestamp", (Get-Date).ToString())
-    $copylog = Invoke-HostCommand -ScriptBlock{
+    $copylog = Invoke-HostCommand -Targets $Target -ScriptBlock{
         # Set up the outcome dictionary
         $outcome = @{}
         # Copy item
