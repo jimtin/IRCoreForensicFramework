@@ -18,9 +18,9 @@ function Invoke-ParallelTargetArtefactGathering {
     11. Invoke-VolatilityPSScan - Processes the memory dump and extracts the PSScan
 
     #>
-    
+    [CmdletBinding()]
     param (
-        $targets=""
+        [Parameter()]$targets=""
     )
 
     # Create output variable
@@ -43,35 +43,37 @@ function Invoke-ParallelTargetArtefactGathering {
     foreach($target in $targets){
         $name = $target + ": ArtefactCollectionPlaybook"
 
+        # Create the storage location
+        New-EndpointForensicStorageLocation -Target $target | Out-Null
+
         # Set up the root for importing modules
         $env:WhereAmI = Get-Location
         Start-Job -Name $name -InitializationScript{
-            # Get a list of all Host Hunter modules
-            $content = Get-Content -Path "$env:WhereAmI\modulemanifest.txt"
-
-            # Import into the current job
-            foreach($cmdlet in $content){
-                Import-Module $cmdlet -Force
-            }
-
+            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Copy-WindowsRegistry.psm1"
+            Import-Module $module
+            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Get-WindowsRegistryFiles.psm1"
+            Import-Module $module
+            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Invoke-GetWindowsRegistry.psm1"
+            Import-Module $module
         } -ScriptBlock{
             # Create the endpoint dictionary
             $endpointoutcomes = @{
-                "HostName" = $target
+                "HostName" = $args[0]
             }
 
-            # Get the targets sessions from the session list
-            $targetsession = Get-PSSession | Where-Object {$_.Name -eq $target}
+            $target = $args[0]
+
+            Write-Host "Getting information from " + $target
 
             # Create the remote staging location
-            $messagetitle = "Target: " + $target 
-            $message = "Setting up remote staging location"
-            Write-HostHunterInformation -MessageData $message -MessageTitle $messagetitle -TooltipNotification
-            $staginglocation = New-RemoteStagingLocation -Target $target
-            # Add outcome to endpointoutcomes variable
-            $endpointoutcomes.Add("RemoteStagingOutcome", $staginglocation)
-            Write-Output $staginglocation
-        }
+            # todo
+
+            # Get Windows Registry files
+            Copy-WindowsRegistry -Target $target
+            #$windowsregistry = Invoke-GetWindowsRegistry -Target $target
+
+            #Write-Output $windowsregistry
+        } -ArgumentList $target
     }
 
 }

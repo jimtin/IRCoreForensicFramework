@@ -11,16 +11,19 @@ function Copy-RemoteEventLogging{
     param (
         [Parameter()]$Target = ""
     )
+    
     # Setup overall outcome variable
     $outcome = @{
         "HostHunterObject" = "Copy-RemoteEventLogging"
         "DateTime" = (Get-Date).ToString()
     }
+    
     # Get the timestamp of the command being run
     $outcome.Add("CopyRemoteEventLogsTimestamp", (Get-Date).ToString())
     $copylog = Invoke-HostCommand -Targets $Target -ScriptBlock{
         # Set up the outcome dictionary
         $outcome = @{}
+        
         # Copy item
         $copyitem = Copy-Item -LiteralPath C:\Windows\System32\winevt\Logs -Destination C:\PerformanceInformation -Recurse
         $outcome.Add("EventLogCopy", $copyitem)
