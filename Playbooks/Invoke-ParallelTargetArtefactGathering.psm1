@@ -46,6 +46,8 @@ function Invoke-ParallelTargetArtefactGathering {
         # Create the storage location
         New-EndpointForensicStorageLocation -Target $target | Out-Null
 
+        $session = Get-PSSession | Where-Object {$_.ComputerName -eq $Target}
+
         # Set up the root for importing modules
         $env:WhereAmI = Get-Location
         Start-Job -Name $name -InitializationScript{
@@ -55,6 +57,10 @@ function Invoke-ParallelTargetArtefactGathering {
             Import-Module $module
             $module = $env:WhereAmI + "\Actions\WindowsRegistry\Invoke-GetWindowsRegistry.psm1"
             Import-Module $module
+            $module = $env:WhereAmI + "\CoreEndpointInteraction\Invoke-PlaybookCommand.psm1"
+            Import-Module $module
+            $module = $env:WhereAmI + "\CoreEndpointInteraction\Invoke-HostCommand.psm1"
+            Import-Module $module
         } -ScriptBlock{
             # Create the endpoint dictionary
             $endpointoutcomes = @{
@@ -62,18 +68,22 @@ function Invoke-ParallelTargetArtefactGathering {
             }
 
             $target = $args[0]
+            $session = $args[1]
+            $cred = $args[2]
 
-            Write-Host "Getting information from " + $target
+            #$session = New-PSSession -ComputerName $target -Credential $cred
+
+            #Invoke-Command -Session $session -ScriptBlock{Get-Process}
 
             # Create the remote staging location
             # todo
 
             # Get Windows Registry files
-            Copy-WindowsRegistry -Target $target
+            Copy-WindowsRegistry -Target $target -Credentials $cred -playbook
             #$windowsregistry = Invoke-GetWindowsRegistry -Target $target
 
             #Write-Output $windowsregistry
-        } -ArgumentList $target
+        } -ArgumentList $target, $session, $cred
     }
 
 }

@@ -12,8 +12,10 @@ function Get-WindowsRegistryFiles {
     5. HKEY_CURRENT_CONFIG
 
     #>
+    [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)][string]$Target
+        [Parameter(Mandatory=$true)][string]$Target,
+        [Parameter][System.Management.Automation.CredentialAttribute]$cred
     )
     
     # Set up outcome variable

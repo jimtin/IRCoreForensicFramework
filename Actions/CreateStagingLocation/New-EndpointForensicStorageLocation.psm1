@@ -20,6 +20,7 @@ function New-EndpointForensicStorageLocation {
 
     # Test path to see if it already exists
     $Location = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts"
+    $Location = Test-Path -Path $Location
 
     # If it doesn't, create it
     if($Location -ne $true){

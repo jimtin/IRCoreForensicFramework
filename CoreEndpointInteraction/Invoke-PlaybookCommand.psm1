@@ -8,11 +8,12 @@ function Invoke-PlaybookCommand {
     #>
 
     param (
-        [Parameter()]$Targets="",
-        [Parameter(Mandatory=$true)]$Scriptblock
+        [Parameter(Mandatory=$true)]$Targets,
+        [Parameter(Mandatory=$true)]$Scriptblock,
+        [Parameter(Mandatory=$true)][System.Management.Automation.PSCredential]$Credentials
     )
 
-    $HostHunterCommand = Invoke-HostCommand -Targets $Targets -Scriptblock $Scriptblock -partofplaybook
+    $HostHunterCommand = Invoke-HostCommand -Targets $Targets -Credential $Credentials -Scriptblock $Scriptblock -partofplaybook
 
     # Return output to pipeline
     Write-Output $HostHunterCommand

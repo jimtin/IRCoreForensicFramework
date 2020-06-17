@@ -16,22 +16,38 @@ function Invoke-HostCommand{
         [Parameter()]$Targets="",
         [Parameter()][switch]$silent, 
         [Parameter()][switch]$partofplaybook,
-        [Parameter()][switch]$notjob
+        [Parameter()][switch]$notjob,
+        [Parameter()][System.Management.Automation.PSCredential]$Credential
     )
 
-    # Set up targets
-    if($Targets -eq ""){
-        # Get the current list of target powershell sessions
-        $targets = Get-PSSession
-    }else{
-        $Targets = Get-PSSession | Where-Object {$_.ComputerName -eq $Targets}
-    }
+    
 
     # Determine how command is to be run. Is this going to be a job, silent, part of a playbook etc
-    if($partofplaybook -or $notjob){
+    if($partofplaybook){
+        # A new session will need to be created
+        $session = New-PSSession -ComputerName $Targets -Credential $cred
         # Take command and run it without piping it into a job
+        $HostHunterCommand = Invoke-Command -Session $session -ScriptBlock $Scriptblock
+    }elseif (notjob) {
+        # Set up targets
+        if($Targets -eq ""){
+            # Get the current list of target powershell sessions
+            $targets = Get-PSSession
+        }else{
+            $Targets = Get-PSSession | Where-Object {$_.ComputerName -eq $Targets}
+        }
+
+        # Run command without using a job
         $HostHunterCommand = Invoke-Command -Session $targets -ScriptBlock $Scriptblock
-    }else{
+    }
+    else{
+        # Set up targets
+        if($Targets -eq ""){
+            # Get the current list of target powershell sessions
+            $targets = Get-PSSession
+        }else{
+            $Targets = Get-PSSession | Where-Object {$_.ComputerName -eq $Targets}
+        }
         # Take command and run as a job
         $HostHunterCommand = Invoke-Command -Session $targets -ScriptBlock $Scriptblock -AsJob 
         # Set up the SimpleCommand text for tooltip notification
