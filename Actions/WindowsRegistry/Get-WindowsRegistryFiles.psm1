@@ -15,7 +15,8 @@ function Get-WindowsRegistryFiles {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)][string]$Target,
-        [Parameter][System.Management.Automation.CredentialAttribute]$cred
+        [Parameter()][System.Management.Automation.PSCredential]$Credentials,
+        [Parameter()][switch]$playbook
     )
     
     # Set up outcome variable
@@ -26,15 +27,25 @@ function Get-WindowsRegistryFiles {
     }
 
     # Assisting in making this parallel by ensuring this command can only implement one target at a time. Parallelization can be done at a more abstract level
-    
-    # Get the session associated with the Target
-    $session = Get-PSSession | Where-Object {$_.ComputerName -eq $Target}
+    if($playbook){
+        # Set up the location where artifacts will be extracted to
+        $location = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts"
 
-    # Set up the location where artifacts will be extracted to
-    $location = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts"
+        # Create the PSSession (as this is in a separate job, needs to be recreated)
+        $session = New-PSSession -ComputerName $Target -Credential $Credentials
 
-    # Copy the folder across, including recursive files
-    $copyitem = Copy-Item -FromSession $session -Path "C:\PerformanceInformation\Registry" -Recurse -Destination $location
+        # Copy the folder across, including recursive files
+        $copyitem = Copy-Item -FromSession $session -Path "C:\PerformanceInformation\Registry" -Recurse -Destination $location
+    }else{
+        # Get the session associated with the Target
+        $session = Get-PSSession | Where-Object {$_.ComputerName -eq $Target}
+
+        # Set up the location where artifacts will be extracted to
+        $location = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts"
+
+        # Copy the folder across, including recursive files
+        $copyitem = Copy-Item -FromSession $session -Path "C:\PerformanceInformation\Registry" -Recurse -Destination $location
+    }
 
     # Add the outcome to the outcome variable
     $outcome.Add("CopyInformation", $copyitem)

@@ -68,8 +68,7 @@ function Invoke-ParallelTargetArtefactGathering {
             }
 
             $target = $args[0]
-            $session = $args[1]
-            $cred = $args[2]
+            $cred = $args[1]
 
             #$session = New-PSSession -ComputerName $target -Credential $cred
 
@@ -80,10 +79,11 @@ function Invoke-ParallelTargetArtefactGathering {
 
             # Get Windows Registry files
             Copy-WindowsRegistry -Target $target -Credentials $cred -playbook
+            Get-WindowsRegistryFiles -Target $target -Credentials $cred -playbook 
             #$windowsregistry = Invoke-GetWindowsRegistry -Target $target
 
             #Write-Output $windowsregistry
-        } -ArgumentList $target, $session, $cred
+        } -ArgumentList $target, $cred
     }
 
 }
