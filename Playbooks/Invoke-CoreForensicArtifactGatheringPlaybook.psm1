@@ -5,17 +5,13 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
 
     .DESCRIPTION
     This orchestration module invokes the following modules to get core forensic artefacts
-    1. New-LocalDataStagingLocation - Sets up the local datastaging location
-    2. New-RemoteStagingLocation - On target list goes and creates a staging location
-    3. Copy-RemoteEventLogging - Copies SRUDB and EventLogs to remote staging location
-    4. Get-RemoteEventLogging - Gets the SRUDB and EventLogs
-    5. Move-WinPMEM - Moves the winpmem executable across to remote endpoint ready for a remote memory dump
-    6. Invoke-MemoryDump - Invokes a memory dump on the remote endpoint
-    7. Get-MemoryDump - Gets a memory dump on the remote endpoint
-    8. Format-SRUDB - Formats the SRUDB into a useable format
-    9. Invoke-VolatilityCmdline - Processes the memory dump and extracts the cmdlines
-    10. Invoke-VolatilityPSList - Processes the memory dump and extracts the PSList
-    11. Invoke-VolatilityPSScan - Processes the memory dump and extracts the PSScan
+    1. Creates remote and local data staging locations
+    2. Captures some current state details for later comparison
+    3. Captures registry
+    4. Captures eventlogs and the SRU database
+    5. Dumps and extracts memory
+
+    Can run on an arbitary number of remote machines, depending on disk space and network bandwidth
 
     #>
     [CmdletBinding()]
@@ -59,9 +55,9 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
                 Import-Module $module
             }
         } -ScriptBlock{
-            # Create the endpoint dictionary
+            # Create the endpoint outcomes
             $endpointoutcomes = @{
-                "HostName" = $args[0]
+                "Target" = $args[0]
             }
 
             $target = $args[0]

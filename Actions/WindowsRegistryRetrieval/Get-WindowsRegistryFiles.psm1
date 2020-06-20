@@ -33,6 +33,18 @@ function Get-WindowsRegistryFiles {
     # Copy the folder across, including recursive files
     $copyitem = Copy-Item -FromSession $Target -Path "C:\PerformanceInformation\Registry" -Recurse -Destination $location
 
+    # Check for a range of Registry Artefacts being successfully extracted
+    $reglocation = $location + "\Registry"
+
+    # Check for registry folder
+    $regfolder = Test-Path -Path $reglocation
+    $outcome.Add("RegistryFolder", $regfolder)
+
+    # Check for software hive
+    $softwarehivelocation = $reglocation + "\HKLM.reg"
+    $softwarehive = Test-Path -Path $softwarehivelocation
+    $outcome.Add("SoftwareRegistryHive", $softwarehive)
+
     # Add the outcome to the outcome variable
     $outcome.Add("CopyInformation", $copyitem)
 

@@ -9,47 +9,56 @@ function Format-SRUDB {
     
     #>
     param (
-        [Parameter()]$Target = ""
+        [Parameter(Mandatory=$true)][string]$Target,
+        [Parameter()][switch]$registryexists
     )
 
-    # Create the output dictionary
-    $output = @{
+    # Create the outcome dictionary
+    $outcome = @{
         "HostHunterObject" = "Format-SRUDB"
         "DateTime" = (Get-Date).ToString()
+        "Target" = $target
     }
 
-    # Get the endpoint from the target list
-    $endpoints = Get-TargetList
 
-    if($Target -ne ""){
-        $endpoints = $Target
-    }
-
-    foreach($endpoint in $endpoints){
-        # Create dictionary for output
-        $endpointdict = @{}
-
-        # Create input location
-        $inputloc = "C:\ExtractionDirectory\" + $endpoint + "_ForensicArtifacts\EventLoggingandSRU\sru\SRUDB.dat"
+    # Create input location
+    $inputloc = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts\EventLoggingandSRU\sru\SRUDB.dat"
         
-        # Add to the output object
-        $endpointdict.Add("InputLocation", $inputloc)
+    # Add to the output object
+    $outcome.Add("InputLocation", $inputloc)
 
-        # Create the output location
-        $outputloc =  "C:\ExtractionDirectory\" + $endpoint + "_ForensicArtifacts\sru_database.xlsx"
+    # Create the output location
+    $outputloc =  "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts\ProcessedArtefacts\sru_database.xlsx"
         
-        # Add to the output object
-        $endpointdict.Add("OutputLocation", $outputloc)
+    # Add to the output object
+    $outcome.Add("OutputLocation", $outputloc)
 
-        # Now run the executeable
+    # If registry exists, run file with registry option
+    if($registryexists){
+        $outcome.Add("RegistryExists", $true)
+
+        # Set up the registry hive location
+        $registryhive = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\Registry\HKLM.reg"
+        $outcome.Add("RegistryHiveLocation", $registryhive)
+
+        # Run the executeable
+        $srumdb = .\Executeables\srum_dump2.exe --SRUM_INFILE $inputloc --XLSX_OUTFILE $outputloc --XLSX_TEMPLATE ".\Executeables\SRUM_TEMPLATE2.xlsx" --REG_HIVE $registryhive
+        $outcome.Add("SRUMDBOutput", $srumdb)
+    }else {
+        $outcome.Add("RegistryExists", $false)
+
+        # Set up the registry hive location
+        $registryhive = "Doesnotexist"
+        $outcome.Add("RegistryHiveLocation", $srumdb)
+
+        # Run the executeable
         $srumdb = .\Executeables\srum_dump2.exe --SRUM_INFILE $inputloc --XLSX_OUTFILE $outputloc --XLSX_TEMPLATE ".\Executeables\SRUM_TEMPLATE2.xlsx"
-        
-        # Add the results to the output object
-        $endpointdict.Add("SRUDB_Processing", $srumdb)
-
-        # Add all results to the output dictionary
-        $output.Add($endpoint, $endpointdict)
+        $outcome.Add("SRUMDBOutput", $srumdb)
     }
+
+    # Test SRU Formatted file exists
+    $sruoutput = Test-Path -Path $outputloc
+    $outcome.Add("SRUFileOutcome", $sruoutput)
 
     # Return outcomes to the user
     Write-Output $output

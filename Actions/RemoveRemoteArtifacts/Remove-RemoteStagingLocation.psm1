@@ -47,8 +47,6 @@ function Remove-RemoteStagingLocation{
     # Add the timing to output
     $outcome.Add("TimeTaken", $stopwatch.Elapsed)
 
-    
-
     # Add the results to outcome dictionary
     $outcome.Add("EndpointOutcomes", $pathexists)
     

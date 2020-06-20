@@ -32,12 +32,18 @@ function Get-RemoteEventLogging{
     }
 
     # Copy the Event Logs
-    $eventlogs = Copy-Item -FromSession $Target -Path "C:\PerformanceInformation\Logs" -Recurse -Destination $ExtractionPath
-    $outcome.Add("EventLogExtraction", $eventlogs)
+    Copy-Item -FromSession $Target -Path "C:\PerformanceInformation\Logs" -Recurse -Destination $ExtractionPath | Out-Null
+    # Test they were successfully extracted
+    $logpath = $ExtractionPath + "\Logs"
+    $eventlogsoutcome = Test-Path -Path $logpath
+    $outcome.Add("EventLogExtractionOutcome", $eventlogsoutcome)
 
     # Copy the SRU
     $sru = Copy-Item -FromSession $Target -Path "C:\PerformanceInformation\sru" -Recurse -Destination $ExtractionPath
-    $outcome.Add("SRUExtraction", $sru)
+    # Test they were successfully extracted
+    $srupath = $ExtractionPath + "\sru"
+    $sruoutcome = Test-Path -Path $srupath
+    $outcome.Add("SRUExtractionOutcome", $sruoutcome)
     
     # Return the outcome to the user
     Write-Output $outcome
