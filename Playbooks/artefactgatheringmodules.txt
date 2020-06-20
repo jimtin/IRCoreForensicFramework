@@ -13,3 +13,8 @@
 .\Actions\EventLogandSRURetrieval\Invoke-GetRemoteEventLogsandSRU.psm1
 .\Actions\EventLogandSRURetrieval\Copy-RemoteEventLogging.psm1
 .\Actions\EventLogandSRURetrieval\Get-RemoteEventLogging.psm1
+.\Actions\RemoveRemoteArtifacts\Remove-RemoteStagingLocation.psm1
+.\Actions\EventCapture\Out-Events.psm1
+.\Actions\CreateStagingLocation\New-CurrentStateStagingLocation.psm1
+.\Actions\CurrentStateDetailsRetrieval\Get-CurrentProcesses.psm1
+.\Actions\CurrentStateDetailsRetrieval\Invoke-GetCurrentStateDetails.psm1

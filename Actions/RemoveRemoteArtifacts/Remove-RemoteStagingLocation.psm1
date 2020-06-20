@@ -10,7 +10,7 @@ function Remove-RemoteStagingLocation{
     #>
     [CmdletBinding()]
     param (
-        [Parameter()]$Target = ""
+        [Parameter(Mandatory=$true)][System.Management.Automation.Runspaces.PSSession]$Target
     )
 
     # Set up outcome variable
@@ -18,52 +18,39 @@ function Remove-RemoteStagingLocation{
         "HostHunterObject" = "Remove-RemoteStagingLocation"
         "StagingLocation" = "C:\PerformanceInformation"
         "DateTime" = (Get-Date).ToString()
+        "Target" = $Target
     }
 
-    # If a target specified, use this, else do all
-    if($Target -eq ""){
-        # Test the endpoint to see if the Performance Information folder exists. If it does, remove recursively
-        $pathexists = Invoke-HostCommand -ScriptBlock{
-            # Set up output dictionary
-            $output = @{}
-            # Get Hostname of the command being run
-            $output.Add("HostName", $env:COMPUTERNAME)
-            # Test for the path
-            $outcome = Test-Path -Path "C:\PerformanceInformation"
-            # If outcome is true, remove the directory
-            if($outcome -eq $true){
-                $output.Add("RemovedPerformanceInformationFolderTimestamp", (Get-Date).ToString())
-                Remove-Item -Path "C:\PerformanceInformation" -Recurse
-            }
-            # Record outcome for posterity
-            $output.Add("Outcome", $outcome)
-            Write-Output $output
-        }
+    # Set up the stopwatch variable to measure how long this takes
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
-        # Add the results to outcome dictionary
-        $outcome.Add("EndpointOutcomes", $pathexists)
-    }else{
-        # Test the endpoint to see if the Performance Information folder exists. If it does, remove recursively
-        $pathexists = Invoke-HostCommand -ScriptBlock{
-            # Set up output dictionary
-            $output = @{}
-            # Get Hostname of the command being run
-            $output.Add("HostName", $env:COMPUTERNAME)
-            # Test for the path
-            $outcome = Test-Path -Path "C:\PerformanceInformation"
-            # If outcome is true, remove the directory
-            if($outcome -eq $true){
-                $output.Add("RemovedPerformanceInformationFolderTimestamp", (Get-Date).ToString())
-                Remove-Item -Path "C:\PerformanceInformation" -Recurse
-            }
-            # Record outcome for posterity
-            $output.Add("Outcome", $outcome)
-            Write-Output $output
+    $pathexists = Invoke-HostHunterCommand -Target $Target -ScriptBlock{
+        # Set up output dictionary
+        $output = @{}
+        # Get Hostname of the command being run
+        $output.Add("HostName", $env:COMPUTERNAME)
+        # Test for the path
+        $outcome = Test-Path -Path "C:\PerformanceInformation"
+        # If outcome is true, remove the directory
+        if($outcome -eq $true){
+            $output.Add("RemovedPerformanceInformationFolderTimestamp", (Get-Date).ToString())
+            Remove-Item -Path "C:\PerformanceInformation" -Recurse
         }
-
-        # Add the results to outcome dictionary
-        $outcome.Add("EndpointOutcomes", $pathexists)
+        # Record outcome for posterity
+        $output.Add("Outcome", $outcome)
+        Write-Output $output
     }
+
+    # Stop the stopwatch
+    $stopwatch.Stop()
+    
+    # Add the timing to output
+    $outcome.Add("TimeTaken", $stopwatch.Elapsed)
+
+    
+
+    # Add the results to outcome dictionary
+    $outcome.Add("EndpointOutcomes", $pathexists)
     
     # Return results to pwsh
     Write-Output $outcome

@@ -38,3 +38,7 @@
 .\Actions\CreateStagingLocation\New-EndpointForensicStorageLocation.psm1
 .\CoreEndpointInteraction\Invoke-HostHunterCommand.psm1
 .\Actions\EventLogandSRURetrieval\Invoke-GetRemoteEventLogsandSRU.psm1
+.\Actions\EventCapture\Out-Events.psm1
+.\Actions\CreateStagingLocation\New-CurrentStateStagingLocation.psm1
+.\Actions\CurrentStateDetailsRetrieval\Get-CurrentProcesses.psm1
+.\Actions\CurrentStateDetailsRetrieval\Invoke-GetCurrentStateDetails.psm1

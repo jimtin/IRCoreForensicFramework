@@ -9,8 +9,7 @@ function New-EndpointForensicStorageLocation {
     #>
     [CmdletBinding()]
     param (
-        [Parameter()][string]$Target, 
-        [Parameter()][System.Management.Automation.Runspaces]$session
+        [Parameter(Mandatory=$true)][System.Management.Automation.Runspaces.PSSession]$Target
     )
 
     # Create output variable
@@ -20,7 +19,7 @@ function New-EndpointForensicStorageLocation {
     }
 
     # Test path to see if it already exists
-    $Location = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts"
+    $Location = "C:\ExtractionDirectory\" + $Target.ComputerName + "_ForensicArtifacts"
     $Location = Test-Path -Path $Location
 
     # If it doesn't, create it

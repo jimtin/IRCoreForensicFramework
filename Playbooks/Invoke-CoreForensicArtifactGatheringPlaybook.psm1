@@ -78,6 +78,10 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
             $remotedatastaginglocation = New-RemoteStagingLocation -Target $target
             $endpointoutcomes.Add("RemoteDataStaging", $remotedatastaginglocation)
 
+            # Get current state details before being polluted with the rest of the artifact gathering
+            $currentstate = Invoke-GetCurrentStateDetails -Target $target
+            $endpointoutcomes.Add("CurrentState", $currentstate)
+
             # Get Windows Registry files
             $windowsregistry = Invoke-GetWindowsRegistry -Target $target
             $endpointoutcomes.Add("WindowsRegistry", $windowsregistry)
@@ -89,6 +93,13 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
             # Get event logs and SRU
             $windowseventlogsandsru = Invoke-GetRemoteEventLogsandSRU -Target $target  
             $endpointoutcomes.Add("WindowsEventLogs", $windowseventlogsandsru)
+
+            # Remove artifacts from remote endpoint
+            $removal = Remove-RemoteStagingLocation -Target $target
+            $endpointoutcomes.Add("RemoveStagingLocation", $removal)
+
+            # Write the events undertaken to the folder
+            Out-Events -Target $target -CommandHistory $endpointoutcomes
 
             Write-Output $endpointoutcomes
         } -ArgumentList $target, $cred 
