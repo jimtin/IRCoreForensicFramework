@@ -9,7 +9,8 @@ function New-EndpointForensicStorageLocation {
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)][string]$Target
+        [Parameter()][string]$Target, 
+        [Parameter()][System.Management.Automation.Runspaces]$session
     )
 
     # Create output variable

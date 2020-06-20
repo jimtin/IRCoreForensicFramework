@@ -29,7 +29,7 @@ function Invoke-ParallelTargetArtefactGathering {
         "DateTimeCreated" = (Get-Date).ToString()
     }
 
-    Write-HostHunterInformation -MessageData "Invoking Artifact Gathering Playbook" -ForegroundColor "Red"
+    Write-HostHunterInformation -MessageData "Invoking Artifact Gathering Playbook" -ForegroundColor "Green"
 
     # Set the target
     if($targets -eq ""){
@@ -42,25 +42,19 @@ function Invoke-ParallelTargetArtefactGathering {
 
     foreach($target in $targets){
         $name = $target + ": ArtefactCollectionPlaybook"
-
-        # Create the storage location
-        New-EndpointForensicStorageLocation -Target $target | Out-Null
-
-        $session = Get-PSSession | Where-Object {$_.ComputerName -eq $Target}
+        
+        # Notify the user that it's started
+        Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Started"
 
         # Set up the root for importing modules
         $env:WhereAmI = Get-Location
-        Start-Job -Name $name -InitializationScript{
-            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Copy-WindowsRegistry.psm1"
-            Import-Module $module
-            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Get-WindowsRegistryFiles.psm1"
-            Import-Module $module
-            $module = $env:WhereAmI + "\Actions\WindowsRegistry\Invoke-GetWindowsRegistry.psm1"
-            Import-Module $module
-            $module = $env:WhereAmI + "\CoreEndpointInteraction\Invoke-PlaybookCommand.psm1"
-            Import-Module $module
-            $module = $env:WhereAmI + "\CoreEndpointInteraction\Invoke-HostCommand.psm1"
-            Import-Module $module
+        $endpointjob = Start-Job -Name $name -InitializationScript{
+            # Import the modules needed for this playbook
+            $modulepath = $env:WhereAmI + "\Playbooks\artefactgatheringmodules.txt"
+            $modules = Get-Content -Path $modulepath
+            foreach($module in $modules){
+                Import-Module $module
+            }
         } -ScriptBlock{
             # Create the endpoint dictionary
             $endpointoutcomes = @{
@@ -70,20 +64,38 @@ function Invoke-ParallelTargetArtefactGathering {
             $target = $args[0]
             $cred = $args[1]
 
-            #$session = New-PSSession -ComputerName $target -Credential $cred
+            # Create a new powershell session on the target. This is required as a Powershell Job is a brand new memory space
+            $session = New-PSSession -ComputerName $target -Credential $cred
+            $endpointoutcomes.Add("TargetSession", $session)
 
-            #Invoke-Command -Session $session -ScriptBlock{Get-Process}
+            # Convert the target variable into a session
+            $target = $session
 
-            # Create the remote staging location
-            # todo
+            # Create the staging location on the remote endpoint
+            $remotedatastaginglocation = New-RemoteStagingLocation -Target $target
+            $endpointoutcomes.Add("RemoteDataStaging", $remotedatastaginglocation)
 
             # Get Windows Registry files
-            Copy-WindowsRegistry -Target $target -Credentials $cred -playbook
-            Get-WindowsRegistryFiles -Target $target -Credentials $cred -playbook 
-            #$windowsregistry = Invoke-GetWindowsRegistry -Target $target
+            $windowsregistry = Invoke-GetWindowsRegistry -Target $target
+            $endpointoutcomes.Add("WindowsRegistry", $windowsregistry)
 
-            #Write-Output $windowsregistry
+            # Get remote memory
+            $remotememory = Invoke-GetRemoteMemory -Target $Target
+            $endpointoutcomes.Add("WindowsRemoteMemory", $remotememory)
+
+
+            Write-Output $endpointoutcomes
         } -ArgumentList $target, $cred
+
+        $status = Get-Job $endpointjob.Id
+        while ($status.State -ne "Completed") {
+            $status = Get-Job $endpointjob.Id
+        }
+
+        # Notify user it's completed
+        Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Completed"
+
+        Receive-Job -Id $endpointjob.Id -AutoRemoveJob -Wait
     }
 
 }

@@ -8,17 +8,21 @@ function Invoke-MemoryDump{
 
     [CmdletBinding()]
     param (
-        [Parameter()]$Target
+        [Parameter(Mandatory=$true)][System.Management.Automation.Runspaces.PSSession]$Target
     )
 
     # Set up outcome variable
     $outcome = @{
         "HostHunterObject" = "Invoke-MemoryDump"
         "DateTime" = (Get-Date).ToString()
+        "Target" = $Target
     }
 
+    # Set up the stopwatch variable to measure how long this takes
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
     # Run command
-    $memdump = Invoke-HostCommand -Targets $Target -RegisterCommand -ScriptBlock{
+    $memdump = Invoke-HostHunterCommand -Target $Target -ScriptBlock{
         # Create outcome dictionary
         $outcome = @{}
 
@@ -48,10 +52,13 @@ function Invoke-MemoryDump{
             $outcome.Add("EnoughSpace", $false)
         }
         Write-Output $outcome
-    } -SimpleCommand "Invoke-MemoryDump"
+    }
 
-    # Get the output of the command from the global RegisteredCommand variable
-    # $memdump = Get-Variable -Name RegisteredCommand -Scope global
+    # Stop the stopwatch
+    $stopwatch.Stop()
+    
+    # Add the timing to output
+    $outcome.Add("TimeTaken", $stopwatch.Elapsed)
 
     # Add the outcome from the command to the outcome variable
     $outcome.Add("Outcome", $memdump)

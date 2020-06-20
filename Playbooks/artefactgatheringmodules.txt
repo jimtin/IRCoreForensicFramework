@@ -1,0 +1,12 @@
+.\Actions\WindowsRegistryRetrieval\Copy-WindowsRegistry.psm1
+.\Actions\WindowsRegistryRetrieval\Invoke-GetWindowsRegistry.psm1
+.\Actions\WindowsRegistryRetrieval\Get-WindowsRegistryFiles.psm1
+.\Actions\CreateStagingLocation\New-RemoteStagingLocation.psm1
+.\CoreEndpointInteraction\Invoke-HostHunterCommand.psm1
+.\Actions\MemoryRetrieval\Compare-MemoryHashes.psm1
+.\Actions\MemoryRetrieval\Get-ExtractedMemoryHash.psm1
+.\Actions\MemoryRetrieval\Get-MemoryDump.psm1
+.\Actions\MemoryRetrieval\Get-RemoteMemoryHash.psm1
+.\Actions\MemoryRetrieval\Invoke-GetRemoteMemory.psm1
+.\Actions\MemoryRetrieval\Invoke-MemoryDump.psm1
+.\Actions\MemoryRetrieval\Move-WinPMEM.psm1

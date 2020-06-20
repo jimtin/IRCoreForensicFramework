@@ -10,7 +10,7 @@ function Invoke-GetWindowsRegistry{
 
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)][string]$Target
+        [Parameter(Mandatory=$true)][System.Management.Automation.Runspaces.PSSession]$Target
     )
 
     # Set up the output variable
@@ -20,6 +20,8 @@ function Invoke-GetWindowsRegistry{
         "TargetHostName" = $Target
     }
 
+    # If a playbook is being used, set this up to run in parallel
+
     # Copy the registry files, add the output to the output variable
     $copyfiles = Copy-WindowsRegistry -Target $Target
     $output.Add("CopyWindowsRegistryFiles", $copyfiles)
@@ -27,6 +29,7 @@ function Invoke-GetWindowsRegistry{
     # Extract the registry files to target endpoint and add the results to the output variable
     $getfiles = Get-WindowsRegistryFiles -Target $Target
     $output.Add("GetWindowsRegistryFiles", $getfiles)
+
 
     # Return the output to the user
     Write-Output $output
