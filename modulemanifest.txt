@@ -14,8 +14,8 @@
 .\Actions\MemoryRetrieval\Move-WinPMEM.psm1
 .\Actions\MemoryRetrieval\Invoke-MemoryDump.psm1
 .\Actions\MemoryRetrieval\Get-MemoryDump.psm1
-.\Actions\RetrieveLogsandSRUDB\Copy-RemoteEventLogging.psm1
-.\Actions\RetrieveLogsandSRUDB\Get-RemoteEventLogging.psm1
+.\Actions\EventLogandSRURetrieval\Copy-RemoteEventLogging.psm1
+.\Actions\EventLogandSRURetrieval\Get-RemoteEventLogging.psm1
 .\Actions\SRUProcessing\Format-SRUDB.psm1
 .\Actions\MemoryProcessing\Invoke-VolatilityPSScan.psm1
 .\Actions\MemoryProcessing\Format-VolatilityOutput.psm1
@@ -29,7 +29,7 @@
 .\SetupModules\Import-VolatilitySymbols.psm1
 .\SetupModules\Copy-Volatility.psm1
 .\SetupModules\Set-PythonAnalysisList.psm1
-.\Playbooks\Invoke-ParallelTargetArtefactGathering.psm1
+.\Playbooks\Invoke-CoreForensicArtifactGatheringPlaybook.psm1
 .\CoreEndpointInteraction\Invoke-PlaybookCommand.psm1
 .\Actions\WindowsRegistryRetrieval\Copy-WindowsRegistry.psm1
 .\Actions\WindowsRegistryRetrieval\New-RegistryFileFolder.psm1
@@ -37,3 +37,4 @@
 .\Actions\WindowsRegistryRetrieval\Invoke-GetWindowsRegistry.psm1
 .\Actions\CreateStagingLocation\New-EndpointForensicStorageLocation.psm1
 .\CoreEndpointInteraction\Invoke-HostHunterCommand.psm1
+.\Actions\EventLogandSRURetrieval\Invoke-GetRemoteEventLogsandSRU.psm1

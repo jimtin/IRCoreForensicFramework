@@ -10,3 +10,6 @@
 .\Actions\MemoryRetrieval\Invoke-GetRemoteMemory.psm1
 .\Actions\MemoryRetrieval\Invoke-MemoryDump.psm1
 .\Actions\MemoryRetrieval\Move-WinPMEM.psm1
+.\Actions\EventLogandSRURetrieval\Invoke-GetRemoteEventLogsandSRU.psm1
+.\Actions\EventLogandSRURetrieval\Copy-RemoteEventLogging.psm1
+.\Actions\EventLogandSRURetrieval\Get-RemoteEventLogging.psm1

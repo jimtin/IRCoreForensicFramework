@@ -1,4 +1,4 @@
-function Invoke-ParallelTargetArtefactGathering {
+function Invoke-CoreForensicArtifactGatheringPlaybook {
     <#
     .SYNOPSIS
     This orchestration (powershell would call it a workflow, but Powershell 7 no longer supports workflows) gets the core forensic outputs from an endpoint
@@ -29,13 +29,16 @@ function Invoke-ParallelTargetArtefactGathering {
         "DateTimeCreated" = (Get-Date).ToString()
     }
 
-    Write-HostHunterInformation -MessageData "Invoking Artifact Gathering Playbook" -ForegroundColor "Green"
-
     # Set the target
     if($targets -eq ""){
         $targets = Get-TargetList
     }
 
+    # Provide feedback to user on what is going to progress
+    foreach($target in $targets){
+        $message = "Invoking CoreForensicArtifactsGathering Playbook on: " + $target
+        Write-HostHunterInformation -MessageData $message -ForegroundColor "Green"
+    }
 
     # Check that current endpoint has a local data staging location set up
     $localdata = New-LocalDataStagingLocation
@@ -83,19 +86,31 @@ function Invoke-ParallelTargetArtefactGathering {
             $remotememory = Invoke-GetRemoteMemory -Target $Target
             $endpointoutcomes.Add("WindowsRemoteMemory", $remotememory)
 
+            # Get event logs and SRU
+            $windowseventlogsandsru = Invoke-GetRemoteEventLogsandSRU -Target $target  
+            $endpointoutcomes.Add("WindowsEventLogs", $windowseventlogsandsru)
 
             Write-Output $endpointoutcomes
-        } -ArgumentList $target, $cred
+        } -ArgumentList $target, $cred 
 
-        $status = Get-Job $endpointjob.Id
-        while ($status.State -ne "Completed") {
-            $status = Get-Job $endpointjob.Id
-        }
+        Register-ObjectEvent -InputObject $endpointjob -EventName StateChanged -MessageData $target -Action {
+            if($sender.State -eq "Completed"){
+                $target = ($sender.Name -split ":")[0]
+                $name = $target + ": ArtefactCollectionPlaybook"
+                
+                # Notify the user that it's completed
+                Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Completed"
+                
+                # Receive the sending job and remove it from the list
+                Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
 
-        # Notify user it's completed
-        Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Completed"
+                # Unregister the event
+                $eventSubscriber | Unregister-Event
+                $eventSubscriber.Action | Remove-Job -Force
+            }
+        } | Out-Null
 
-        Receive-Job -Id $endpointjob.Id -AutoRemoveJob -Wait
+        
     }
 
 }

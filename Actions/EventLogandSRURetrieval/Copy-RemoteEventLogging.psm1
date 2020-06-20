@@ -9,18 +9,17 @@ function Copy-RemoteEventLogging{
     #>
     [CmdletBinding()]
     param (
-        [Parameter()]$Target = ""
+        [Parameter(Mandatory=$true)][System.Management.Automation.Runspaces.PSSession]$Target
     )
     
     # Setup overall outcome variable
     $outcome = @{
         "HostHunterObject" = "Copy-RemoteEventLogging"
         "DateTime" = (Get-Date).ToString()
+        "Target" = $Target
     }
-    
-    # Get the timestamp of the command being run
-    $outcome.Add("CopyRemoteEventLogsTimestamp", (Get-Date).ToString())
-    $copylog = Invoke-HostCommand -Targets $Target -ScriptBlock{
+
+    $copylog = Invoke-HostHunterCommand -Target $Target -ScriptBlock{
         # Set up the outcome dictionary
         $outcome = @{}
         
@@ -33,7 +32,8 @@ function Copy-RemoteEventLogging{
         Write-Output $outcome
     }
     # Add the output from this command to the outcome variable
-    $outcome.Add("CopyRemoteEventLogsOutput", $copylog)
+    $outcome.Add("Outcome", $copylog)
+    
     # Return outcome from this command
     Write-Output $outcome
 }
