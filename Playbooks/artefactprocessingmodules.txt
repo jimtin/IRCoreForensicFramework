@@ -1,1 +1,3 @@
 .\Actions\SRUProcessing\Format-SRUDB.psm1
+.\Actions\EventLogProcessing\Export-ProcessStartEvents.psm1
+.\Actions\EventLogProcessing\Invoke-EventLogProcessing.psm1

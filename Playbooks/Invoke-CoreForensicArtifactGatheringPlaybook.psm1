@@ -21,8 +21,9 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
 
     # Create output variable
     $output = @{
-        "Object" = "Invoke-TargetArtefactGathering"
+        "HostHunterObject" = "Invoke-CoreForensicArtifactGatheringPlaybook"
         "DateTimeCreated" = (Get-Date).ToString()
+        "Target" = $targets
     }
 
     # Set the target
@@ -40,6 +41,7 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
     $localdata = New-LocalDataStagingLocation
 
     foreach($target in $targets){
+        # Set up the target name
         $name = $target + ": ArtefactCollectionPlaybook"
         
         # Notify the user that it's started
@@ -55,6 +57,9 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
                 Import-Module $module
             }
         } -ScriptBlock{
+            # Set up the stopwatch variable to measure how long this takes
+            $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
             # Create the endpoint outcomes
             $endpointoutcomes = @{
                 "Target" = $args[0]
@@ -93,6 +98,12 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
             # Remove artifacts from remote endpoint
             $removal = Remove-RemoteStagingLocation -Target $target
             $endpointoutcomes.Add("RemoveStagingLocation", $removal)
+
+            # Stop the stopwatch
+            $stopwatch.Stop()
+            
+            # Add the timing to output
+            $endpointoutcomes.Add("TimeTaken", $stopwatch.Elapsed)
 
             # Write the events undertaken to the folder
             Out-Events -Target $target -CommandHistory $endpointoutcomes

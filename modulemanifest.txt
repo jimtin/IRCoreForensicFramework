@@ -44,3 +44,5 @@
 .\Actions\CurrentStateDetailsRetrieval\Invoke-GetCurrentStateDetails.psm1
 .\Playbooks\Invoke-CoreForensicArtifactProcessingPlaybook.psm1
 .\Actions\CreateStagingLocation\New-ProcessedArtefactsStagingLocation.psm1
+.\Actions\EventLogProcessing\Export-ProcessStartEvents.psm1
+.\Actions\EventLogProcessing\Invoke-EventLogProcessing.psm1

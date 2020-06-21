@@ -45,12 +45,9 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
             }
         }
     }else {
-        Write-Host $target
         # Simply create the processed artefact staging location
         New-ProcessedArtefactsStagingLocation -Target $Target
     }
-
-    Write-Host $Target
 
     # For each target, start a job
     foreach($endpoint in $Target){
@@ -59,6 +56,9 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
 
         # Set up the name of the job
         $name = $Target + ": ArtefactProcessingPlaybook"
+
+        # Notify user that job has started
+        Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Started"
 
         # Convert to a string
         $name = $name.tostring()
@@ -77,6 +77,9 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
                 "Target" = $args[0]
             }
 
+            # Set up the stopwatch variable to measure how long this takes
+            $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
             # Set up the target
             $target = $args[0]
 
@@ -86,7 +89,6 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
 
             # If remote srudb successful, process it
             if($targetinfo.WindowsEventLogs.EventLogExtraction.SRUExtractionOutcome -eq $true){
-                Write-Host "Processing SRUDB"
                 # Depending on if registry hive successfully extracted, process SRU DB
                 if($targetinfo.WindowsRegistry.GetWindowsRegistryFiles.SoftwareRegistryHive -eq $true){
                     $sruformat = Format-SRUDB -Target $target -registryexists
@@ -97,8 +99,40 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
                 # Add outcome to endpoint outcomes
                 $endpointoutcomes.Add("SRUProcessed", $sruformat)
             }
+
+            # If getting event logs is successful, process them
+            if($targetinfo.WindowsEventLogs.EventLogExtraction.EventLogExtractionOutcome -eq $true){
+                $eventlogs = Invoke-EventLogProcessing -Target $target
+                $endpointoutcomes.Add("EventLogProcessing", $eventlogs)
+            }
+
+
+            # Stop the stopwatch
+            $stopwatch.Stop()
+            
+            # Add the timing to output
+            $endpointoutcomes.Add("TimeTaken", $stopwatch.Elapsed)
+
+            # Return outcome to user
             Write-Output $endpointoutcomes
         } -ArgumentList $endpoint
+
+        Register-ObjectEvent -InputObject $artefactprocessing -EventName StateChanged -MessageData $target -Action {
+            if($sender.State -eq "Completed"){
+                $target = ($sender.Name -split ":")[0]
+                $name = $target + ": ArtefactProcessingPlaybook"
+                
+                # Notify the user that it's completed
+                Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Completed"
+                
+                # Receive the sending job and remove it from the list
+                Receive-Job -Id $sender.Id -AutoRemoveJob -Wait
+
+                # Unregister the event
+                $eventSubscriber | Unregister-Event
+                $eventSubscriber.Action | Remove-Job -Force
+            }
+        } | Out-Null
     }
 
     # Add the timing to output
@@ -108,5 +142,5 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
     $outcome.Add("EndpointOutcomes", $pathexists)
     
     # Return results to pwsh
-    Write-Output $outcome
+    #Write-Output $outcome
 }

@@ -24,6 +24,9 @@ function Get-WindowsRegistryFiles {
         "TargetEndpoint" = $Target
     }
 
+    # Set up the stopwatch variable to measure how long this takes
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
     # Get the HostName from the session
     $hostname = $target.ComputerName
     
@@ -47,6 +50,12 @@ function Get-WindowsRegistryFiles {
 
     # Add the outcome to the outcome variable
     $outcome.Add("CopyInformation", $copyitem)
+
+    # Stop the stopwatch
+    $stopwatch.Stop()
+    
+    # Add the timing to output
+    $outcome.Add("TimeTaken", $stopwatch.Elapsed)
 
     # Return outcome to the user
     Write-Output $outcome
