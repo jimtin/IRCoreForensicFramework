@@ -46,3 +46,6 @@
 .\Actions\CreateStagingLocation\New-ProcessedArtefactsStagingLocation.psm1
 .\Actions\EventLogProcessing\Export-ProcessStartEvents.psm1
 .\Actions\EventLogProcessing\Invoke-EventLogProcessing.psm1
+.\Actions\WindowsPrefetchRetrieval\Copy-WindowsPrefetch.psm1
+.\Actions\WindowsPrefetchRetrieval\Get-WindowsPrefetch.psm1
+.\Actions\WindowsPrefetchRetrieval\Invoke-GetWindowsPrefetch.psm1

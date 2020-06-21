@@ -19,7 +19,8 @@ function Get-RemoteEventLogging{
         "Target" = $Target
     }
 
-    # Extract the logging artifacts from each endpoint in parallel
+    # Set up the stopwatch variable to measure how long this takes
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
     # Set up the destination directory
     $LoggingPath = "C:\ExtractionDirectory\" + $Target.ComputerName + "_ForensicArtifacts"
@@ -44,6 +45,12 @@ function Get-RemoteEventLogging{
     $srupath = $ExtractionPath + "\sru"
     $sruoutcome = Test-Path -Path $srupath
     $outcome.Add("SRUExtractionOutcome", $sruoutcome)
+
+    # Stop the stopwatch
+    $stopwatch.Stop()
+    
+    # Add the timing to output
+    $outcome.Add("TimeTaken", $stopwatch.Elapsed)
     
     # Return the outcome to the user
     Write-Output $outcome

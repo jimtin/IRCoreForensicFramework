@@ -1,10 +1,10 @@
-function Copy-RemoteEventLogging{
+function Copy-WindowsPrefetch{
     <#
     .SYNOPSIS
-    Copies the remote event logs into the performance information folder
+    Copies Windows Prefetch into the performance information folder
 
     .DESCRIPTION
-    Copies the remote event logs into the performance information folder
+    Copies Windows Prefetch into the performance information folder
     
     #>
     [CmdletBinding()]
@@ -14,7 +14,7 @@ function Copy-RemoteEventLogging{
     
     # Setup overall outcome variable
     $outcome = @{
-        "HostHunterObject" = "Copy-RemoteEventLogging"
+        "HostHunterObject" = "Copy-WindowsPrefetch"
         "DateTime" = (Get-Date).ToString()
         "Target" = $Target
     }
@@ -27,10 +27,9 @@ function Copy-RemoteEventLogging{
         $outcome = @{}
         
         # Copy item
-        $copyitem = Copy-Item -LiteralPath C:\Windows\System32\winevt\Logs -Destination C:\PerformanceInformation -Recurse
+        $copyitem = Copy-Item -LiteralPath C:\Windows\Prefetch -Destination C:\PerformanceInformation -Recurse
         $outcome.Add("EventLogCopy", $copyitem)
-        $copysru = Copy-Item -LiteralPath C:\Windows\System32\sru -Destination C:\PerformanceInformation -Recurse
-        $outcome.Add("SRULogCopy", $copysru)
+        
         # Return results
         Write-Output $outcome
     }

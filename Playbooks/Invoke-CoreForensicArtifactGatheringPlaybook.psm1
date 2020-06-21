@@ -83,6 +83,10 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
             $currentstate = Invoke-GetCurrentStateDetails -Target $target
             $endpointoutcomes.Add("CurrentState", $currentstate)
 
+            # Get Windows prefetch information
+            $prefetch = Invoke-GetWindowsPrefetch -Target $Target
+            $endpointoutcomes.Add("Prefetch", $prefetch)
+
             # Get Windows Registry files
             $windowsregistry = Invoke-GetWindowsRegistry -Target $target
             $endpointoutcomes.Add("WindowsRegistry", $windowsregistry)
