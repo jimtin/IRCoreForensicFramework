@@ -1,4 +1,4 @@
-function Format-SRUDB {
+function Format-SRUDBtoXLSX {
     <#
     .SYNOPSIS
     Gets the SRUDB.dat file and runs the excellent srum-dump executeable by Mark Baggett
@@ -15,7 +15,7 @@ function Format-SRUDB {
 
     # Create the outcome dictionary
     $outcome = @{
-        "HostHunterObject" = "Format-SRUDB"
+        "HostHunterObject" = "Format-SRUDBtoXLSX"
         "DateTime" = (Get-Date).ToString()
         "Target" = $target
     }
@@ -45,7 +45,7 @@ function Format-SRUDB {
 
         # Run the executeable
         $srumdb = .\Executeables\srum_dump2.exe --SRUM_INFILE $inputloc --XLSX_OUTFILE $outputloc --XLSX_TEMPLATE ".\Executeables\SRUM_TEMPLATE2.xlsx" --REG_HIVE $registryhive
-        $outcome.Add("SRUMDBOutput", $srumdb)
+        $outcome.Add("SRUMDump2Output", $srumdb)
     }else {
         $outcome.Add("RegistryExists", $false)
 
@@ -55,12 +55,17 @@ function Format-SRUDB {
 
         # Run the executeable
         $srumdb = .\Executeables\srum_dump2.exe --SRUM_INFILE $inputloc --XLSX_OUTFILE $outputloc --XLSX_TEMPLATE ".\Executeables\SRUM_TEMPLATE2.xlsx"
-        $outcome.Add("SRUMDBOutput", $srumdb)
+        $outcome.Add("SRUMDump2Output", $srumdb)
     }
 
     # Test SRU Formatted file exists
     $sruoutput = Test-Path -Path $outputloc
-    $outcome.Add("SRUFileOutcome", $sruoutput)
+    $outcome.Add("SRUXLSFileOutcome", $sruoutput)
+
+    # Convert XLS file into JSON
+    if($sruoutput -eq $true){
+        
+    }
 
     # Stop the stopwatch
     $stopwatch.Stop()

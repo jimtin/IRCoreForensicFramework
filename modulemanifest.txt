@@ -16,7 +16,7 @@
 .\Actions\WindowsMemoryRetrieval\Get-MemoryDump.psm1
 .\Actions\WindowsEventLogandSRURetrieval\Copy-RemoteEventLogging.psm1
 .\Actions\WindowsEventLogandSRURetrieval\Get-RemoteEventLogging.psm1
-.\Actions\WindowsSRUProcessing\Format-SRUDB.psm1
+.\Actions\WindowsSRUProcessing\Format-SRUDBtoXLSX.psm1
 .\Actions\WindowsMemoryProcessing\Invoke-VolatilityPSScan.psm1
 .\Actions\WindowsMemoryProcessing\Format-VolatilityOutput.psm1
 .\Actions\WindowsMemoryProcessing\Invoke-VolatilityPSList.psm1
@@ -51,3 +51,5 @@
 .\Actions\WindowsPrefetchRetrieval\Invoke-GetWindowsPrefetch.psm1
 .\SetupModules\Expand-PrefetchParser.psm1
 .\Actions\WindowsMemoryProcessing\Invoke-WindowsMemoryImageProcessing.psm1
+.\Actions\WindowsSRUProcessing\Format-SrumDumptoJson.psm1
+.\Actions\WindowsSRUProcessing\Format-SRUDBtoJSON.psm1

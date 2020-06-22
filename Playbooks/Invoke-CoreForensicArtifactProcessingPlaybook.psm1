@@ -95,9 +95,9 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
             if($targetinfo.WindowsEventLogs.EventLogExtraction.SRUExtractionOutcome -eq $true){
                 # Depending on if registry hive successfully extracted, process SRU DB
                 if($targetinfo.WindowsRegistry.GetWindowsRegistryFiles.SoftwareRegistryHive -eq $true){
-                    $sruformat = Format-SRUDB -Target $target -registryexists
+                    $sruformat = Format-SRUDBtoJson -Target $target -registryexists
                 }else {
-                    $sruformat = Format-SRUDB -Target $target
+                    $sruformat = Format-SRUDBtoJSON -Target $target
                 }
                 
                 # Add outcome to endpoint outcomes
