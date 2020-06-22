@@ -57,6 +57,10 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
         # Set up the name of the job
         $name = $Target + ": ArtefactProcessingPlaybook"
 
+        # Notify user in commandline
+        $message = $name + " started. Job registered."
+        Write-HostHunterInformation -MessageData $message -ForegroundColor "Green"
+
         # Notify user that job has started
         Write-HostHunterInformation -ToolTipNotification -MessageTitle $name -MessageData "Started"
 
@@ -110,6 +114,12 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
             if($targetinfo.Prefetch.PrefetchGetOutcome.PrefetchExtractionOutcome -eq $true){
                 $prefetch = Format-WindowsPrefetch -Target $target
                 $endpointoutcomes.Add("Prefetch", $prefetch)
+            }
+
+            # If getting windows memory was successful, process this
+            if($targetinfo.WindowsRemoteMemory.MemoryDumpRetrieved -eq $true){
+                $memoryprocessing = Invoke-WindowsMemoryImageProcessing -Target $target
+                $endpointoutcomes.Add("MemoryProcessing", $memoryprocessing)
             }
 
             # Stop the stopwatch

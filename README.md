@@ -1,5 +1,5 @@
 # IRCoreForensicFramework
-Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Built by incident responders for incident responders. 
+Powershell 7 (Powershell Core)/ C# cross platform forensic framework. Built by incident responders for incident responders. 
 
 ## Core Concepts
 * Laser focused on automating incident response actions, rather than system monitoring. Aims to eliminate Tier I and Tier II adversaries described in the article *Resilient Military Systems and the Advanced Cyber Threat* (https://nsarchive2.gwu.edu/NSAEBB/NSAEBB424/docs/Cyber-081.pdf)
@@ -12,7 +12,7 @@ Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Buil
     * Powershell Core 
     * Python 3.7 (minimum)
     * Plenty of storage space (I'd recommend at least 100Gb if you're looking to extract memory)
-    * Plenty of processing power. (I'd recommend at least a 9th generation i5 or AMD equivalent)
+    * Plenty of processing power. (I'd recommend at least a 9th generation i5 or AMD equivalent). The framework makes extensive use of parallelization to operate at scale, so the more powerful the greater your reach will be. 
 2. Reasonable Powershell experience. This program is currently in Beta, so there's likely to be a bit of interaction to use it.
 
 ## How to use
@@ -31,9 +31,9 @@ Powershell 7 (Powershell Core)/ C# based cross platform forensic framework. Buil
 
 ## A cool example of what happens when you combine operational experience with engineering expertise to automate common Incident Response processes
 
-### Playbook: Invoke-TargetArtefactGathering
+### Playbook: Invoke-CoreForensicArtifactGatheringPlaybook
 #### Overview
-This playbook takes one of the most common and frustrating experiences with Incident Response and automates the entire process. This playbook gathers common forensic artefacts, combines them together and locates them in one place to be processed. Despite this being one of the most common asks from Incident Responders, no tool on the market is as seamless to use as this. Best of all: it's easily extended to gather more artifacts and process them.  
+This playbook automates the gathering of core forensic artefacts. Moreover, it's simple to add more in if you need to. These artefacts are almost always asked for by incident reponders, yet no tool on the market does it as seamlessly as this.   
 
 #### What it does
 1. Records all actions it does, so that when you inevitably need to figure out what has happened on the endpoint, you know which actions were you and which were the adversaries. 
@@ -42,23 +42,35 @@ This playbook takes one of the most common and frustrating experiences with Inci
 4. *Checks if there is enough space on the endpoint to dump memory*
 5. Dumps memory
 6. Extracts the following artefacts to your remote endpoint: 
-    * Memory Dump to your endpoint (and confirms that the hash of what was dumped matches what actually ends up on your machine)
+    * Memory Dump (and confirms that the hash of what was dumped matches what actually ends up on your machine)
     * All the event logs (i.e. the entire event log folder, not just the event logs that some random engineering team thinks are what you need)
     * SRUM database (i.e. the forensic artifact which could allow you to a link a user, process and network activity together)
-7. Processes each artefact using industry standard tools, dropping the output into a .json file for each one
-    * Memory Dump: Uses (https://github.com/volatilityfoundation/volatility3 "Volatility3") to do the following processing (more to come)
-        * PSList
-        * PSScan
-        * Cmdline
-    * SRU DB: Uses Mark Baggetts excellent (https://github.com/MarkBaggett/srum-dump "srum-dump") tool to process the SRUDB
-8. Finishes up by going and deleting the Remote Staging location so that the endpoint doesn't get all clogged up by what you've done
+    * Key Registry hives
+    * Prefetch Folder
+    * Current running processes (for the inevitable question 'Was this process running when we touched this machine?')
+7. Finishes up by going and deleting the Remote Staging location so that the endpoint doesn't get all clogged up by what you've done
 
 Pretty awesome. And it's just the start. Using this platform, significant post-processing is also available :) 
+
+### Playbook: Invoke-CoreForensicArtifactProcessingPlaybook
+#### Overview
+This playbooks automatically processes all the artefacts gathered by the CoreForensicArtifactGatheringPlaybook. Naturally there will be times when not all artefacts are gathered, so this playbook processes what is available and continues onwards. Best of all, all artefacts are output in JSON so they can be easily uploaded to your SIEM of choice. 
+
+#### What it does
+1. Records all actions it does, so that when you inevitably need to figure out what has happened on the endpoint, you know which actions were you and which were the adversaries. 
+2. Processes the following artefacts:
+    * SRU Database, using Mark Baggerts srum_dump2
+    * Prefetch, using Eric Zimmerman's PECmd
+    * Volatility commands using Volatility3 
+    * Some Windows EventLogs (with more being added) using my own custom processing
+3. Outputs all results in JSON, into a folder title "ProcessedArtefacts"
+
+#### Some cool things
+1. Makes use of the Windows ToolTip API. Combined with the use of jobs to multithread operations, this framework can gather these artefacts from multiple endpoints simultaneously. 
+2. Means you can continue to do other actions while the time consuming actions (i.e. extracting memory) continue.
+3. By using extensive use of living-off-the-land techniques, the artefacts left behind by this framework are minimal. Contrast this to many SOC tools and Incident Responders will appreciate the cleanliness of these actions. 
 
 ## Next steps
 1. Integrate the ability to zip using native windows tools
 2. Integrate the ability to automatically upload to cloud storage (likely Amazon s3)
-3. Integrate more forensic artifacts:
-    * Registry Hive 
-    * Prefetch
-4. Start doing some basic post-processing analysis to make IR jobs even easier
+3. Start doing some basic post-processing analysis to make IR jobs even easier

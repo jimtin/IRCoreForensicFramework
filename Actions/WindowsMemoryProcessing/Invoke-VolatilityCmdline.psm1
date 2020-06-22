@@ -23,6 +23,9 @@ function Invoke-VolatilityCmdline {
         "Target" = $Target
     }
 
+    # Wait 5 seconds before kicking off the process
+    Start-Sleep -Seconds 5
+
     # Set up the stopwatch variable to measure how long this takes
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
@@ -37,7 +40,7 @@ function Invoke-VolatilityCmdline {
         
     # Turn into powershell objects
     $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
-    $output.Add("CmdlineResults", $volatilityobjects)
+    $outcome.Add("CmdlineResults", $volatilityobjects)
 
     # Output to a file in case future forensic work is needed
     # Create the file string

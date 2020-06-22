@@ -39,7 +39,7 @@ function Invoke-VolatilityPSScan {
     $volatilityobjects = Format-VolatilityOutput -VolatilityFunctionOutput $results
 
     # Add to the output variable
-    $output.Add("PSScanResults", $volatilityobjects)
+    $outcome.Add("PSScanResults", $volatilityobjects)
 
     # Output to a file in case future forensic work is needed
     # Create the file string
