@@ -16,8 +16,8 @@
 .\Actions\RemoveRemoteArtifacts\Remove-RemoteStagingLocation.psm1
 .\Actions\EventCapture\Out-Events.psm1
 .\Actions\CreateStagingLocation\New-CurrentStateStagingLocation.psm1
-.\Actions\CurrentStateDetailsRetrieval\Get-CurrentProcesses.psm1
-.\Actions\CurrentStateDetailsRetrieval\Invoke-GetCurrentStateDetails.psm1
+.\Actions\WindowsCurrentStateDetailsRetrieval\Get-CurrentProcesses.psm1
+.\Actions\WindowsCurrentStateDetailsRetrieval\Invoke-GetCurrentStateDetails.psm1
 .\Actions\WindowsPrefetchRetrieval\Copy-WindowsPrefetch.psm1
 .\Actions\WindowsPrefetchRetrieval\Get-WindowsPrefetch.psm1
 .\Actions\WindowsPrefetchRetrieval\Invoke-GetWindowsPrefetch.psm1
