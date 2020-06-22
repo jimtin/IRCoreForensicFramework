@@ -23,7 +23,12 @@ Powershell 7 (Powershell Core)/ C# cross platform forensic framework. Built by i
     * This script will download a number of files for you. Take time to understand what is being downloaded. 
     * You will be prompted for credentials. 
 4. Create a target: `New-Target -Target 127.0.0.1`
-5. Start running commands against the target. For instance if you want to get a range of basic forensic artifacts, try the Playbook TargetArtefactGathering: `Invoke-TargetArtefactGathering`
+5. Start running commands against the target. Some examples:
+    * Range of basic forensic artefacts on all targets: `Invoke-CoreForensicArtifactGatheringPlaybook`
+    * Range of basic forensic artefacts on specific target: `Invoke-CoreForensicArtifactGatheringPlaybook -Target 127.0.0.1`
+6. To process artefacts into JSON format:
+    * After using the CoreForensicArtifactGathering Playbook: `Invoke-CoreForensicArtifactProcessingPlaybook`
+    * After using the CoreForensicArtifactGathering Playbook, but processing a specific target: `Invoke-CoreForensicArtifactProcessingPlaybook -Target 127.0.0.1`
 
 ## Assumptions
 * You have administrative access to your network 
@@ -49,6 +54,7 @@ This playbook automates the gathering of core forensic artefacts. Moreover, it's
     * Prefetch Folder
     * Current running processes (for the inevitable question 'Was this process running when we touched this machine?')
 7. Finishes up by going and deleting the Remote Staging location so that the endpoint doesn't get all clogged up by what you've done
+8. Runs the entire process as Powershell Job, so can be mulithreaded. Registers the job with the native windows notification icon, so will simply notify you when completed
 
 Pretty awesome. And it's just the start. Using this platform, significant post-processing is also available :) 
 
@@ -64,6 +70,7 @@ This playbooks automatically processes all the artefacts gathered by the CoreFor
     * Volatility commands using Volatility3 
     * Some Windows EventLogs (with more being added) using my own custom processing
 3. Outputs all results in JSON, into a folder title "ProcessedArtefacts"
+4. Runs the entire process as Powershell Job, so can be mulithreaded. Registers the job with the native windows notification icon, so will simply notify you when completed
 
 #### Some cool things
 1. Makes use of the Windows ToolTip API. Combined with the use of jobs to multithread operations, this framework can gather these artefacts from multiple endpoints simultaneously. 

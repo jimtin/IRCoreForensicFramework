@@ -21,7 +21,6 @@
 .\Actions\WindowsMemoryProcessing\Format-VolatilityOutput.psm1
 .\Actions\WindowsMemoryProcessing\Invoke-VolatilityPSList.psm1
 .\Actions\WindowsMemoryProcessing\Invoke-VolatilityCmdline.psm1
-.\Playbooks\Invoke-TargetArtefactGathering.psm1
 .\Actions\WindowsMemoryRetrieval\Get-RemoteMemoryHash.psm1
 .\Actions\WindowsMemoryRetrieval\Get-ExtractedMemoryHash.psm1
 .\Actions\WindowsMemoryRetrieval\Compare-MemoryHashes.psm1
@@ -30,7 +29,6 @@
 .\SetupModules\Copy-Volatility.psm1
 .\SetupModules\Set-PythonAnalysisList.psm1
 .\Playbooks\Invoke-CoreForensicArtifactGatheringPlaybook.psm1
-.\CoreEndpointInteraction\Invoke-PlaybookCommand.psm1
 .\Actions\WindowsRegistryRetrieval\Copy-WindowsRegistry.psm1
 .\Actions\WindowsRegistryRetrieval\New-RegistryFileFolder.psm1
 .\Actions\WindowsRegistryRetrieval\Get-WindowsRegistryFiles.psm1
