@@ -44,6 +44,11 @@ function Invoke-GetRemoteMemory {
 
     # todo: if memory hashes don't match, go and get memory again
 
+    # Confirm that the memory dump has been retrieved successfully
+    $location = "C:\ExtractionDirectory\" + $target.ComputerName + "_ForensicArtifacts\memory.raw"
+    $memoryretrieved = Test-Path -Path $location
+    $outcome.Add("MemoryDumpRetrieved", $memoryretrieved)
+
     # Stop the stopwatch
     $stopwatch.Stop()
     

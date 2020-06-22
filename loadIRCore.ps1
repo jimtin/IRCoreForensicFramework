@@ -29,6 +29,9 @@ $volatility = Copy-Volatility
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
 Import-VolatilitySymbols
 
+# Make sure Prefetch Parser is ready
+Expand-PrefetchParser
+
 # Set up the target tracking variable
 if((Get-Variable -Name GlobalTargetList -ErrorAction SilentlyContinue) -eq $null){
     New-Variable -Name "GlobalTargetList" -Scope global -Visibility Public -Value @{}

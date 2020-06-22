@@ -20,6 +20,8 @@ function Format-SRUDB {
         "Target" = $target
     }
 
+    # Set up the stopwatch variable to measure how long this takes
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
     # Create input location
     $inputloc = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts\EventLoggingandSRU\sru\SRUDB.dat"
@@ -59,6 +61,12 @@ function Format-SRUDB {
     # Test SRU Formatted file exists
     $sruoutput = Test-Path -Path $outputloc
     $outcome.Add("SRUFileOutcome", $sruoutput)
+
+    # Stop the stopwatch
+    $stopwatch.Stop()
+    
+    # Add the timing to output
+    $outcome.Add("TimeTaken", $stopwatch.Elapsed)
 
     # Return outcomes to the user
     Write-Output $output

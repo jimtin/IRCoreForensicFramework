@@ -106,6 +106,11 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
                 $endpointoutcomes.Add("EventLogProcessing", $eventlogs)
             }
 
+            # If getting prefetch was successful, process this
+            if($targetinfo.Prefetch.PrefetchGetOutcome.PrefetchExtractionOutcome -eq $true){
+                $prefetch = Format-WindowsPrefetch -Target $target
+                $endpointoutcomes.Add("Prefetch", $prefetch)
+            }
 
             # Stop the stopwatch
             $stopwatch.Stop()

@@ -18,5 +18,10 @@
         "ExecutableName": "volatility3.zip",
         "DownloadURL": "https://github.com/volatilityfoundation/volatility3/archive/master.zip",
         "OutputPath": "Executeables"
+    },
+    {
+        "ExecutableName": "PECmd.zip",
+        "DownloadURL": "https://f001.backblazeb2.com/file/EricZimmermanTools/PECmd.zip",
+        "OutputPath": "Executeables"
     }
 ]

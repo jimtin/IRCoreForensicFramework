@@ -1,3 +1,9 @@
-.\Actions\SRUProcessing\Format-SRUDB.psm1
-.\Actions\EventLogProcessing\Export-ProcessStartEvents.psm1
-.\Actions\EventLogProcessing\Invoke-EventLogProcessing.psm1
+.\Actions\WindowsSRUProcessing\Format-SRUDB.psm1
+.\Actions\WindowsEventLogProcessing\Export-ProcessStartEvents.psm1
+.\Actions\WindowsEventLogProcessing\Invoke-EventLogProcessing.psm1
+.\Actions\WindowsPrefetchProcessing\Format-WindowsPrefetch.psm1
+.\Actions\WindowsMemoryProcessing\Format-VolatilityOutput.psm1
+.\Actions\WindowsMemoryProcessing\Invoke-VolatilityCmdline.psm1
+.\Actions\WindowsMemoryProcessing\Invoke-VolatilityPSList.psm1
+.\Actions\WindowsMemoryProcessing\Invoke-VolatilityPSScan.psm1
+.\Actions\WindowsMemoryProcessing\Invoke-WindowsMemoryImageProcessing.psm1
