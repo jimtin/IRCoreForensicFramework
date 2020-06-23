@@ -128,6 +128,10 @@ function Invoke-CoreForensicArtifactProcessingPlabook {
             # Add the timing to output
             $endpointoutcomes.Add("TimeTaken", $stopwatch.Elapsed)
 
+            # Convert all the information on performance etc into JSON and then save in ProcessedArtefacts folder
+            $fileloc = "C:\ExtractionDirectory\" + $target + "_ForensicArtifacts\ProcessedArtefacts\commandhistory.json"
+            $endpointoutcomes | ConvertTo-Json | Out-File $fileloc            
+
             # Return outcome to user
             Write-Output $endpointoutcomes
         } -ArgumentList $endpoint
