@@ -1,11 +1,11 @@
 # Set the base image to be Microsoft provided Powershell Core image
-FROM mcr.microsoft.com/powershell
+FROM mcr.microsoft.com/powershell:7.0.2-windowsservercore-1909
 
 # Set up some environment variables. Credit to Jung-Hyun Nam https://medium.com/rkttu/creating-python-docker-image-for-windows-nano-server-151e1ab7188a
 ENV PYTHON_VERSION 3.8.3
 
 # Change the shell to be powershell by default
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
+SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop';"]
 
 # Add in Python
 ADD https://www.python.org/ftp/python/3.8.3/python-3.8.3-amd64.exe /python-3.8.3.exe
@@ -16,11 +16,14 @@ ADD https://github.com/jimtin/IRCoreForensicFramework/archive/master.zip /HostHu
 # Expand the HostHunter zip
 RUN powershell Expand-Archive -Path C:\\HostHunter.zip -Destination C:\\HostHunter
 
+# Check powershell version
+RUN pwsh Write-Host $psversiontable.PSVersion
+
 # Change permissions to be an administrator
 USER ContainerAdministrator
 
 # Install all the executable files and symbol tables
-RUN powershell C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
+RUN pwsh C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
 
 # Run initial HostHunter loadIRCore to confirm all the executeables are loaded
 #RUN powershell Get-Content C:\\HostHunter

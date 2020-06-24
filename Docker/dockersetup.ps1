@@ -1,7 +1,11 @@
 #Requires -Version 7
 
+# Set up the current working directory
+$location = (Get-Location).tostring()
+
 # Get a list of modules from the modules file 
-$modules = Get-Content -Path .\modulemanifest.txt
+$path = $location + "\modulemanifest.txt"
+$modules = Get-Content -Path $path
 
 foreach ($cmdlet in $modules){
     $messagestring = "Importing cmdlet: " + $cmdlet
