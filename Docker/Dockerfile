@@ -23,7 +23,7 @@ RUN powershell Write-Host $psversiontable.PSVersion
 USER ContainerAdministrator
 
 # Install all the executable files and symbol tables
-RUN powershell C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
+RUN pwsh C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
 
 # Run initial HostHunter loadIRCore to confirm all the executeables are loaded
 #RUN powershell Get-Content C:\\HostHunter
