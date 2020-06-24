@@ -19,11 +19,17 @@ RUN powershell Expand-Archive -Path C:\\HostHunter.zip -Destination C:\\HostHunt
 # Check powershell version
 RUN powershell Write-Host $psversiontable.PSVersion
 
-# Change permissions to be an administrator
-USER ContainerAdministrator
-
-# Install all the executable files and symbol tables
-RUN pwsh C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
+# Download HostHunter executables to the install directory
+## WinPmem
+ADD https://github.com/Velocidex/c-aff4/releases/download/v3.3.rc3/winpmem_v3.3.rc3.exe C:\\HostHunter\\IRCoreForensicFramework-master\\Executeables\\WinPmem.exe
+## Srum_Dump2
+ADD https://github.com/MarkBaggett/srum-dump/blob/master/srum_dump2.exe C:\\HostHunter\\IRCoreForensicFramework-master\\Executeables\\srum_dump2.exe
+## SRUM Dump Template
+ADD https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx C:\\HostHunter\\IRCoreForensicFramework-master\\Executeables\\SRUM_TEMPLATE2.exe
+## Volatility3
+ADD https://github.com/volatilityfoundation/volatility3/archive/master.zip C:\\HostHunter\\IRCoreForensicFramework-master\\Executeables\\volatility3.zip
+## Prefetch Parser PECmd.zip
+ADD https://f001.backblazeb2.com/file/EricZimmermanTools/PECmd.zip C:\\HostHunter\\IRCoreForensicFramework-master\\Executeables\\PECmd.zip
 
 # Run initial HostHunter loadIRCore to confirm all the executeables are loaded
 #RUN powershell Get-Content C:\\HostHunter

@@ -1,6 +1,0 @@
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\\Get-Executeable.psm1"
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\\Get-SetupExecuteables.psm1"
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\Import-VolatilitySymbols.psm1"
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\\Copy-Volatility.psm1"
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\\Set-PythonAnalysisList.psm1"
-"C:\\HostHunter\\IRCoreForensicFramework-master\\SetupModules\\Expand-PrefetchParser.psm1"

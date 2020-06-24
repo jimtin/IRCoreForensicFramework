@@ -6,7 +6,7 @@
     },
     {
         "ExecutableName": "srum_dump2.exe",
-        "DownloadURL": "https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx",
+        "DownloadURL": "https://github.com/MarkBaggett/srum-dump/blob/master/srum_dump2.exe",
         "OutputPath": "Executeables"
     },
     {
