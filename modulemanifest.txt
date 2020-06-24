@@ -52,3 +52,6 @@
 .\Actions\WindowsSRUProcessing\Format-SrumDumptoJson.psm1
 .\Actions\WindowsSRUProcessing\Format-SRUDBtoJSON.psm1
 .\Actions\CloudStoragePreparation\Compress-AllForensicArtefacts.psm1
+.\Actions\WindowsEventLogProcessing\Export-ProcessStopEvents.psm1
+.\CoreEndpointInteraction\Update-Credentials.psm1
+.\Actions\WindowsProcessPostProcessing\Join-WindowsProcessStartProcessStopLogs.psm1

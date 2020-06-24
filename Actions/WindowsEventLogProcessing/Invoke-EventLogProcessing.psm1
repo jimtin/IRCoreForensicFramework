@@ -26,6 +26,10 @@ function Invoke-EventLogProcessing {
     $processstart = Export-ProcessStartEvents -Target $Target
     $outcome.Add("ProcessStartLogs", $processstart)
 
+    # Process process stop logs
+    $processstop = Export-ProcessStopEvents -Target $Target
+    $outcome.Add("ProcessStopLogs", $processstop)
+
     # Stop the stopwatch
     $stopwatch.Stop()
     

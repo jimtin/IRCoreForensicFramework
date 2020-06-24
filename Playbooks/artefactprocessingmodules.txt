@@ -9,3 +9,4 @@
 .\Actions\WindowsMemoryProcessing\Invoke-WindowsMemoryImageProcessing.psm1
 .\Actions\WindowsSRUProcessing\Format-SrumDumptoJson.psm1
 .\Actions\WindowsSRUProcessing\Format-SRUDBtoJSON.psm1
+.\Actions\WindowsEventLogProcessing\Export-ProcessStopEvents.psm1

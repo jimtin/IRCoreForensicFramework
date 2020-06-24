@@ -7,6 +7,7 @@ function Export-ProcessStartEvents {
     Exports process start events from the Security event logs. Assumes that event log file exists, but checks for process start events.
 
     #>
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)][string]$Target
     )
@@ -40,12 +41,12 @@ function Export-ProcessStartEvents {
             "Source" = "ExtractedEventLogs"
             "Type" = "ProcessStart"
             "Target" = $Target
-            "ProcessId" = $procstart.ProcessId
             "DateTime" = $procstart.TimeCreated
             "SecurityID" = $procstart.Properties[0].Value.Value
             "CreatorAccountName" = $procstart.Properties[1].Value
             "CreatorAccountDomain" = $procstart.Properties[2].Value
             "CreatorLogonID" = $procstart.Properties[3].Value.Value
+            "ProcessId" = $procstart.Properties[4].Value
             "ProcessStartPath" = $procstart.Properties[5].Value
             "TokenElevationType" = $procstart.Properties[6].Value
             "ParentProcessId" = $procstart.Properties[7].Value
@@ -56,6 +57,7 @@ function Export-ProcessStartEvents {
             "TargetLogonId" = $procstart.Properties[12].Value
             "ParentProcessPath" = $procstart.Properties[13].Value
             "CreatorSecurityID" = $procstart.Properties[14].Value.Value
+            "EventLogRecordId" = $procstart.RecordId
         }
 
         # Add the log object back to formattedlogs array
