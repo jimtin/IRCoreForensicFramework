@@ -17,13 +17,13 @@ ADD https://github.com/jimtin/IRCoreForensicFramework/archive/master.zip /HostHu
 RUN powershell Expand-Archive -Path C:\\HostHunter.zip -Destination C:\\HostHunter
 
 # Check powershell version
-RUN pwsh Write-Host $psversiontable.PSVersion
+RUN powershell Write-Host $psversiontable.PSVersion
 
 # Change permissions to be an administrator
 USER ContainerAdministrator
 
 # Install all the executable files and symbol tables
-RUN pwsh C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
+RUN powershell C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\dockersetup.ps1
 
 # Run initial HostHunter loadIRCore to confirm all the executeables are loaded
 #RUN powershell Get-Content C:\\HostHunter

@@ -3,6 +3,8 @@
 # Set up the current working directory
 $location = (Get-Location).tostring()
 
+Write-Host $location
+
 # Get a list of modules from the modules file 
 $path = $location + "\modulemanifest.txt"
 $modules = Get-Content -Path $path
