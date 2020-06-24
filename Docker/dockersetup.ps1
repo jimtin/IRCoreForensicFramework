@@ -6,7 +6,7 @@ $location = (Get-Location).tostring()
 Write-Host $location
 
 # Get a list of modules from the modules file
-$modules = Get-Content -Path "C:\\HostHunter\\IRCoreForensicFramework-master\\modulemanifest.txt"
+$modules = Get-Content -Path "C:\\HostHunter\\IRCoreForensicFramework-master\\Docker\\SetupModulesDockerFriendly.txt"
 
 foreach ($cmdlet in $modules){
     $messagestring = "Importing cmdlet: " + $cmdlet
