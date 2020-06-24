@@ -1,5 +1,4 @@
 #Requires -Version 7
-#Requires -RunAsAdministrator
 
 # Get a list of modules from the modules file 
 $modules = Get-Content -Path .\modulemanifest.txt
