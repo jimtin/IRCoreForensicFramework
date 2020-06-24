@@ -42,6 +42,7 @@ function Join-WindowsProcessStartProcessStopLogs {
         # Get the Process Id
         $processid = $processstart.ProcessID
         $processstartpath = $processstart.ProcessStartPath
+        $exename = $processstartpath.Split("\")[-1]
 
         # Get the process start date
         $processstartdate = $processstart.DateTime
@@ -94,9 +95,11 @@ function Join-WindowsProcessStartProcessStopLogs {
             "CreatorSecurityID" = $processstart.CreatorSecurityID
             "EventLogProcessStartRecordId" = $processstart.EventLogRecordId
             "EventLogProcessStopRecordId" = $firstprocessstop.EventLogRecordId
-            "IntermediateResults" = $intermediateresults
-            "ProcessStartDetails" = $processstart
-            "ProcessStopDetails" = $firstprocessstop
+            "ProcessStartEventLog" = $true
+            "ProcessStopEventLog" = $true
+            "FullProcessStartObject" = $processstart
+            "FullProcessStopObject" = $firstprocessstop
+            "ExecutableName" = $exename
         }
 
          # Add to the results array

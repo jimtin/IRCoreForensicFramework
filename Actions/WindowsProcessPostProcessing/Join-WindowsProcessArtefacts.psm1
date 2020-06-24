@@ -24,15 +24,25 @@ function Join-WindowsProcessArtefacts {
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
     # Set up the base location
-    $baselocation = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts\"
+    $baselocation = "C:\ExtractionDirectory\" + $Target + "_ForensicArtifacts\ProcessedArtefacts"
 
-    # Get the processes which were running at the time of acquisition
-    $currentprocesses = $baselocation = "CurrentStateInformation\processes.json"
-    $runningprocesses = Get-Content $currentprocesses | ConvertFrom-Json
+    # Join Windows ProcessStart and ProcessStop Event Logs together
+    $process = Join-WindowsProcessStartProcessStopLogs -Target $Target
+
+    # Search through Prefetch and try to match the logs
+
+    # Add in PSList from Volatility
+
+    # Add in PSScan from Volatility
+
+
 
     # For now, let's work with a single process to develop a search strategy
     # 1. Get a current process which I know about
     # 2. Let's work through all the artefacts I have - process start, process stop, prefetch, memory, SRUM. What is unique across all of them? 
+
+    # Add the outcomes from process into the object to be returned
+    $outcome.Add("ProcessObjects", $process)
 
     # Stop the stopwatch
     $stopwatch.Stop()
