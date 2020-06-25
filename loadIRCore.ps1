@@ -42,5 +42,5 @@ Write-HostHunterInformation -MessageData "GlobalTargetList variable set" -Foregr
 # Set up the global credential variable
 if ($cred -eq $null){
     $cred = Get-Credential
-    New-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
+    Set-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
 }

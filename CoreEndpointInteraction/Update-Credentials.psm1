@@ -12,6 +12,6 @@ function Update-Credentials {
     )
 
     $cred = Get-Credential
-    New-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
+    Set-Variable -Name "cred" -Scope global -Visibility Public -Value $cred 
     
 }
