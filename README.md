@@ -16,7 +16,8 @@ Powershell 7 (Powershell Core)/ C# cross platform forensic framework. Built by i
 2. Reasonable Powershell experience. This program is currently in Beta, so there's likely to be a bit of interaction to use it.
 
 ## Setup (Docker)
-1. Navigate to Docker
+1. Navigate to https://hub.docker.com/r/jimtin/hosthunter
+2. Check out if this is what you're looking for and then download and use. Let me know how it goes if there's anything I can do to improve :) 
 
 ## How to use
 1. Clone repository into your own directory
