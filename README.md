@@ -7,13 +7,16 @@ Powershell 7 (Powershell Core)/ C# cross platform forensic framework. Built by i
 * Fun and interesting
 * No need to use a host agent - this tool uses living off the land techniques, combined with the WinPmem executeable
 
-## Setup (What you need to use)
+## Setup (What you need to use if you don't want to use the docker image)
 1. Your own endpoint with the following installed: 
     * Powershell Core 
     * Python 3.7 (minimum)
     * Plenty of storage space (I'd recommend at least 100Gb if you're looking to extract memory)
     * Plenty of processing power. (I'd recommend at least a 9th generation i5 or AMD equivalent). The framework makes extensive use of parallelization to operate at scale, so the more powerful the greater your reach will be. 
 2. Reasonable Powershell experience. This program is currently in Beta, so there's likely to be a bit of interaction to use it.
+
+## Setup (Docker)
+1. Navigate to Docker
 
 ## How to use
 1. Clone repository into your own directory
