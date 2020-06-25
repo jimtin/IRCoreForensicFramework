@@ -1,4 +1,4 @@
-function Invoke-CoreForensicArtifactProcessingPlabook {
+function Invoke-CoreForensicArtifactProcessingPlaybook {
     <#
     .SYNOPSIS
     Processes all available forensic artifacts collected by the CoreForensicArtifactGathering Playbook

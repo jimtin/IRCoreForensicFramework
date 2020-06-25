@@ -23,6 +23,26 @@ function New-Target{
             $message = "Target " + $endpoint + " already exists"
             Write-HostHunterInformation -MessageData $message
         }else{
+            $targets = $endpoint
+            if($GlobalTargetList.Count -ge 1){
+                # Extract each target name
+                foreach($targettobeadded in $GlobalTargetList.Values){
+                    Write-Host $targettobeadded.PSSession.ComputerName
+                    $targets = $targets + "," + $targettobeadded.PSSession.ComputerName
+                }
+
+            }
+
+            Write-Host $targets
+            
+            # Notify user
+            $message = "Adding " + $endpoint + " to TrustedHosts list"
+            Write-HostHunterInformation -MessageData $message -ForegroundColor "Green"
+
+            # Set the trusted hosts registry key
+            Set-Item WSMan:\localhost\Client\TrustedHosts $targets -Force
+
+            # Now create the endpoint session
             New-EndpointSession -Target $endpoint -Credential $cred
         }
     }

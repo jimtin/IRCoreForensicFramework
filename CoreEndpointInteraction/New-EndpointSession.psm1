@@ -14,7 +14,7 @@ function New-EndpointSession{
 
     # Create output dictionary
     $output = @{
-        "ObjectName" = "SessionCreated"
+        "ObjectName" = "New-EndpointSession"
         "DateTime" = (Get-Date).ToString()
     }
 

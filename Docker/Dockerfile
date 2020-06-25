@@ -66,4 +66,4 @@ RUN powershell Enable-PSRemoting -Force
 WORKDIR C:\\HostHunter\\IRCoreForensicFramework
 
 # Upon start up, load HostHunter into memory space
-CMD pwsh C://HostHunter//IRCoreForensicFramework//loadIRCore.ps1
+#CMD pwsh C://HostHunter//IRCoreForensicFramework//loadIRCore.ps1

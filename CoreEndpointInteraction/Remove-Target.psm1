@@ -18,6 +18,9 @@ function Remove-Target{
             # If yes, remove
             Remove-EndpointSession -Target $endpoint | Out-Null
             $message = "Target " + $endpoint + " removed"
+
+            # todo: need to be able to remove targets dynamically
+
         }else{
             $message = "Target " + $endpoint + " is not currently targeted"
         }

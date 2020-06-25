@@ -11,8 +11,6 @@ function Invoke-HostHunterCommand {
     param (
         [Parameter(Mandatory=$true)]$Scriptblock, 
         [Parameter()]$Target
-        # [Parameter()][System.Management.Automation.PSCredential]$Credential,
-        # [Parameter()][switch]$playbookcommand
         # todo: DomainCommand variable
     )
 
