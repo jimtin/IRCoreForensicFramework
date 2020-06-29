@@ -14,10 +14,10 @@ ADD https://www.python.org/ftp/python/3.8.3/python-3.8.3-amd64.exe /python-3.8.3
 ADD https://github.com/jimtin/IRCoreForensicFramework/archive/master.zip /HostHunter.zip
 
 # Expand the HostHunter zip
-RUN powershell Expand-Archive -Path C:\\HostHunter.zip -Destination C:\\HostHunter
+RUN Expand-Archive -Path C:\\HostHunter.zip -Destination C:\\HostHunter
 
 # Rename the extracted HostHunter folder
-RUN powershell Rename-Item -Path C:\\HostHunter\\IRCoreForensicFramework-master -NewName IRCoreForensicFramework
+RUN Rename-Item -Path C:\\HostHunter\\IRCoreForensicFramework-master -NewName IRCoreForensicFramework
 
 # Download HostHunter executables to the install directory
 ## WinPmem
@@ -30,6 +30,8 @@ ADD https://github.com/MarkBaggett/srum-dump/blob/master/SRUM_TEMPLATE2.xlsx C:\
 ADD https://github.com/volatilityfoundation/volatility3/archive/master.zip C:\\HostHunter\\IRCoreForensicFramework\\Executeables\\volatility3.zip
 ## Prefetch Parser PECmd.zip
 ADD https://f001.backblazeb2.com/file/EricZimmermanTools/PECmd.zip C:\\HostHunter\\IRCoreForensicFramework\\Executeables\\PECmd.zip
+## ImportExcel Powershell module
+#RUN Import-Module -Name ImportExcel
 
 # Create the Extraction Folder
 RUN mkdir C://ExtractionDirectory
@@ -38,15 +40,15 @@ RUN mkdir C://ExtractionDirectory
 RUN mkdir C://HostHunter//IRCoreForensicFramework//PythonAnalysisList
 
 # Expand Volatility
-RUN powershell Expand-Archive -Path C:\\HostHunter\\IRCoreForensicFramework\\Executeables\\volatility3.zip C:\\HostHunter\IRCoreForensicFramework\\PythonAnalysisList
+RUN Expand-Archive -Path C:\\HostHunter\\IRCoreForensicFramework\\Executeables\\volatility3.zip C:\\HostHunter\IRCoreForensicFramework\\PythonAnalysisList
 
 # Rename to volatility 3
-RUN powershell Rename-Item -Path C:\\HostHunter\IRCoreForensicFramework\\PythonAnalysisList\\volatility3-master -NewName volatility3
+RUN Rename-Item -Path C:\\HostHunter\IRCoreForensicFramework\\PythonAnalysisList\\volatility3-master -NewName volatility3
 
 # Delete the .github and development aspects of volatility3
-RUN powershell Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\.github -recurse
-RUN powershell Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\development -recurse
-RUN powershell Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\.gitignore
+RUN Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\.github -recurse
+RUN Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\development -recurse
+RUN Remove-Item -Path C:\\HostHunter\\IRCoreForensicFramework\\PythonAnalysisList\\volatility3\\.gitignore
 
 # Add in the symbols tables to volatility3
 ## Windows Symbols
@@ -60,7 +62,7 @@ ADD https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip C:\
 RUN C:\\python-3.8.3.exe /quiet InstallAllUsers=1 PrependPath=1
 
 # Enable Powershell Remoting
-RUN powershell Enable-PSRemoting -Force
+RUN Enable-PSRemoting -Force
 
 # Set up the working directory
 WORKDIR C:\\HostHunter\\IRCoreForensicFramework

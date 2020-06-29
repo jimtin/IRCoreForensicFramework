@@ -29,7 +29,7 @@ function Join-WindowsProcessArtefacts {
     # Join Windows ProcessStart and ProcessStop Event Logs together
     $process = Join-WindowsProcessStartProcessStopLogs -Target $Target
 
-    # Search through Prefetch and try to match the logs
+    # Search through Prefetch and try to match the Processes
 
     # Add in PSList from Volatility
 

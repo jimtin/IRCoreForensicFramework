@@ -29,6 +29,13 @@ $volatility = Copy-Volatility
 Write-HostHunterInformation -MessageData "Ensuring Volatility3 Symbols Tables are available"
 Import-VolatilitySymbols
 
+# Check that ImportExcel module is ready
+$module = Get-InstalledModule -Name ImportExcel -ErrorAction SilentlyContinue
+if($module -eq $null){
+    Install-Module ImportExcel -Force
+}
+Write-HostHunterInformation -MessageData "ImportExcel Powershell Module available" -ForegroundColor "Cyan"
+
 # Make sure Prefetch Parser is ready
 Expand-PrefetchParser
 
