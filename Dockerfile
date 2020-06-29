@@ -31,7 +31,12 @@ ADD https://github.com/volatilityfoundation/volatility3/archive/master.zip C:\\H
 ## Prefetch Parser PECmd.zip
 ADD https://f001.backblazeb2.com/file/EricZimmermanTools/PECmd.zip C:\\HostHunter\\IRCoreForensicFramework\\Executeables\\PECmd.zip
 ## ImportExcel Powershell module
-#RUN Import-Module -Name ImportExcel
+### Set PSGallery to be trusted to avoid it being declined
+RUN Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+### Install the module
+RUN Install-Module -Name ImportExcel -Force
+### Set the repository back to untrusted
+RUN Set-PSRepository -Name 'PSGallery' -InstallationPolicy Untrusted
 
 # Create the Extraction Folder
 RUN mkdir C://ExtractionDirectory
