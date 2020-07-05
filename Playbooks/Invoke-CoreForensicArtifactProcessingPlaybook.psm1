@@ -161,5 +161,5 @@ function Invoke-CoreForensicArtifactProcessingPlaybook {
     $outcome.Add("EndpointOutcomes", $pathexists)
     
     # Return results to pwsh
-    #Write-Output $outcome
+    Write-Output $outcome
 }

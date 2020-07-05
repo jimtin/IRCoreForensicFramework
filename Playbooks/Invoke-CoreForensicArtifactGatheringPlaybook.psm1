@@ -135,4 +135,6 @@ function Invoke-CoreForensicArtifactGatheringPlaybook {
         
     }
 
+    # Return outcome to user
+    Write-Output $output
 }
