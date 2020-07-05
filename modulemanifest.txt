@@ -55,3 +55,4 @@
 .\Actions\WindowsEventLogProcessing\Export-ProcessStopEvents.psm1
 .\CoreEndpointInteraction\Update-Credentials.psm1
 .\Actions\WindowsProcessPostProcessing\Join-WindowsProcessStartProcessStopLogs.psm1
+.\DockerVolume\Copy-ToDockerVolume.psm1
